@@ -2,6 +2,16 @@
 
 This log records implementation tasks using actual dates and verified results. A task's commit is identified by the task ID in its commit message; a commit cannot contain its own hash.
 
+## SOF-006 — Publish incremental GitHub checkpoints
+
+- **Date/time:** 2026-09-05 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Create small commits, push them to the supplied GitHub repository, and keep the asset work as an independently reviewable checkpoint.
+- **Starting repository state:** `main` had two approved local commits and accumulated uncommitted SOF-003 through SOF-005 work. The configured GitHub remote had no branch history.
+- **Changed paths:** Split work into focused commits, updated README/roadmap/scope/decisions/changelogs/AI disclosure to record publication, and left local assistant skills/configuration untracked.
+- **Validation:** Asset validation, lint, strict typecheck, 25 tests, and production build passed immediately before publication. Every staged set passed `git diff --cached --check` and a private-key pattern scan. `git push -u origin main` created the remote `main` branch successfully.
+- **External actions excluded:** No Vercel import, production deployment, World activation, ENS transaction, or other sponsor operation.
+- **Commit status:** Approved by the builder in the publication request. This audit update uses `docs(SOF-006): record github publication`.
+
 ## SOF-005 — Build the greybox plaza and initial runtime asset batch
 
 - **Date/time:** 2026-09-05 PKT (UTC+05:00)
@@ -14,7 +24,7 @@ This log records implementation tasks using actual dates and verified results. A
 - **Checks not yet run:** Full automated traversal to every booth and physical-device landscape touch validation remain pending. The greybox assets have not received production polish, collision-overlay comparison, or 1×/2×/3× review. No sponsor flow, push, deployment, or transaction was attempted.
 - **AI assistance:** Codex implemented and tested the slice. OpenAI image generation produced the retained style reference; Codex rejected it as runtime art and created exact deterministic exports. Prompt archived at `docs/prompts/SOF-005-greybox-plaza.md`.
 - **Risks and pending work:** The generated reference is not a runtime asset. Greybox silhouettes and terrain transitions need future art polish. Static founders, full dialogue, the discovery quest, Bug Squash, fire states, and backend gameplay truth belong to later tasks.
-- **Commit status:** Pending final diff review and builder approval. Proposed message: `feat(SOF-005): add playable greybox plaza and assets`.
+- **Commit status:** Approved by the builder and split into `feat(SOF-005): add greybox runtime asset batch`, `feat(SOF-005): add playable plaza exploration`, and `docs(SOF-005): record plaza validation checkpoint`.
 
 ## SOF-004 — Prioritize core product and disable deferred integrations
 
@@ -28,7 +38,7 @@ This log records implementation tasks using actual dates and verified results. A
 - **Checks not run:** No World proof, ENS transaction, Git push, GitHub publication, Vercel configuration, or production deployment is authorized in this task.
 - **AI assistance:** Codex applied the feature gate, roadmap changes, tests, documentation, and local remote configuration. Prompt archived at `docs/prompts/SOF-004-core-first-sequencing.md`.
 - **Risks and pending work:** Disabled feasibility code still requires maintenance until sponsor work resumes. The next implementation task is the greybox plaza and movement foundation.
-- **Commit status:** Pending validation, diff review, and builder approval. Proposed message: `chore(SOF-004): prioritize core product development`.
+- **Commit status:** Approved by the builder. Message: `chore(SOF-004): prioritize core product development`.
 
 ## SOF-003 — Run isolated sponsor feasibility spikes
 
@@ -44,7 +54,7 @@ This log records implementation tasks using actual dates and verified results. A
 - **Important failed attempts and corrections:** Typechecking initially found incorrect assumptions about the IDKit v3 type export and viem key-generation export; imports were corrected. The first Convex push exposed missing Node types in its separate TypeScript config; Node types were added and the next push passed. After Convex installed newer generated guidance, provider variables were declared in `convex/convex.config.ts`, read through the generated typed `env`, and the compound index was renamed to include both fields. The old account's selected project was inaccessible, so no deployment was attempted there; the builder authorized creation of the replacement project. The first read-only ENS run reached the library-selected Universal Resolver but the default public Ethereum RPC returned HTTP 503 during CCIP-Read; a public-node retry passed and the script gained a default fallback.
 - **AI assistance:** Codex researched current official provider/library guidance, implemented the adapters and evidence harnesses, wrote tests and documentation, deployed the Convex functions, and ran the available checks. Prompt archived at `docs/prompts/SOF-003-sponsor-spikes.md`.
 - **Risks and pending work:** Selfie Check remains medium-assurance and does not eliminate multi-account risk. Provider availability and app enablement are unverified. Convex lacks a declarative unique constraint, so replay safety relies on one serializable indexed mutation. ENSv2 contracts/authorization remain beta and may change before mainnet. The pre-existing Phaser bundle warning remains; the World dynamic chunk does not increase the default app chunk. External acceptance evidence is still required before this task can be approved as complete.
-- **Commit status:** Pending account-backed acceptance tests, final diff review, and builder approval. Proposed message: `feat(SOF-003): add isolated sponsor feasibility spikes`.
+- **Commit status:** Approved by the builder as a feasibility-harness checkpoint. Message: `feat(SOF-003): add isolated sponsor feasibility harnesses`. Account-backed acceptance tests remain pending and are not claimed complete.
 
 ## SOF-002 — Create the application foundation
 

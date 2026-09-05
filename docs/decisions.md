@@ -2,6 +2,10 @@
 
 Important product and engineering decisions are appended here with truthful dates. Planned behavior is distinguished from implemented behavior.
 
+## 2026-09-05 — SOF-006 — Publish incremental source checkpoints
+
+The builder authorized small focused commits and a push to the supplied public GitHub repository. Publish `main` while keeping Vercel, sponsor activation, and production deployment deferred. Local assistant skill/configuration files remain outside repository scope.
+
 ## 2026-09-05 — SOF-005 — Generated references do not bypass runtime asset requirements
 
 The image-generation output is retained only as style provenance because it has a background and incorrect scale. Runtime art is produced as deterministic exact-size RGBA PNGs with a manifest and hashes. This keeps the current batch original, reproducible, separately addressable, and honest about its greybox quality.

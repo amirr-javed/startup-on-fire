@@ -2,6 +2,10 @@
 
 This records planning revisions. It is not evidence that the game, Git repository, sponsor integrations, or runtime assets are implemented. Repository task IDs start at SOF-001 during Git initialization; planning changes use DOC identifiers.
 
+## SOF-006 — September 5, 2026 — GitHub checkpoints published
+
+Split the accumulated work into focused sponsor-feasibility, core-first, runtime-asset, playable-plaza, and documentation commits, then published `main` to the builder-supplied GitHub repository. Vercel and sponsor activation remain deferred.
+
 ## SOF-005 — September 5, 2026 — Playable greybox plaza and assets
 
 Added a 36×22-tile plaza with keyboard/touch movement, camera follow, collision, three booths/founders, a fountain, and contextual interactions. Added 14 original exact-size runtime PNGs, a hashed manifest, deterministic generation/validation scripts, provenance, and validation records. Sponsor, deployment, fuel, quest, fire, and minigame behavior remains deferred.

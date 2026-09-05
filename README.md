@@ -6,7 +6,7 @@ Startup on Fire is an ETHOnline 2026 vertical slice: a cozy pixel city where pla
 
 ## Current status
 
-The core route now renders a playable greybox plaza with movement, camera follow, collision, three booth interactions, original runtime assets, and the existing Convex health connection. World and ENS feasibility code is retained for later but disabled or offline; GitHub publishing and Vercel deployment are deferred.
+The core route now renders a playable greybox plaza with movement, camera follow, collision, three booth interactions, original runtime assets, and the existing Convex health connection. Source is published at `https://github.com/amirr-javed/startup-on-fire`; World and ENS remain disabled or offline, and Vercel deployment is deferred.
 
 ## Requirements
 

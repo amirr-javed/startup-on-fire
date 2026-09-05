@@ -2,6 +2,13 @@
 
 This document records material AI assistance for hackathon transparency. It does not imply that generated suggestions were accepted without human review.
 
+## SOF-006 — 2026-09-05
+
+- **Tool:** OpenAI Codex.
+- **Purpose:** Separate accumulated work into reviewable Git checkpoints, validate the committed tree, scan staged content for secrets, and publish the builder-authorized `main` branch.
+- **External action:** Pushed `main` to `https://github.com/amirr-javed/startup-on-fire.git` after confirming the remote had no branch history.
+- **Excluded:** Vercel, production deployment, sponsor activation, and local assistant skill/configuration files.
+
 ## SOF-005 — 2026-09-05
 
 - **Tools:** OpenAI Codex, OpenAI image generation, and browser-based visual inspection.

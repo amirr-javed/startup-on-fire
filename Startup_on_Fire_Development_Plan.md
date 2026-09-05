@@ -11,7 +11,7 @@
 
 ## Current sequencing decision — core product first
 
-As of September 5, 2026, implementation prioritizes the playable core product before sponsor and publishing work. Build and stabilize the greybox plaza, movement, interactions, discovery loop, minigame, fire states, and server-authoritative realtime rules first. World, ENSv2 completion, public GitHub publishing, and Vercel deployment are deferred until that core loop works. Existing sponsor feasibility code remains disabled and may be re-enabled deliberately later. The day-by-day sections below remain a dependency reference, not the active execution order.
+As of September 5, 2026, implementation prioritizes the playable core product before sponsor and deployment work. Build and stabilize the greybox plaza, movement, interactions, discovery loop, minigame, fire states, and server-authoritative realtime rules first. The builder subsequently authorized publishing incremental source checkpoints to GitHub; World, ENSv2 completion, and Vercel deployment remain deferred until the core loop works. Existing sponsor feasibility code remains disabled and may be re-enabled deliberately later. The day-by-day sections below remain a dependency reference, not the active execution order.
 
 ## 1. Product Mission
 

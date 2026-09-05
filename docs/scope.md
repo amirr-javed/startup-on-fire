@@ -14,7 +14,7 @@ Deferred: full founder dialogue, quests, Bug Squash, fire/fuel behavior, backend
 - Convex health connection, CI, and production build.
 - Core-product work: greybox plaza, movement, interactions, discovery loop, minigame, fire states, and server-authoritative realtime rules.
 - Retained but disabled/offline World Selfie Check and ENSv2 feasibility code for deliberate later reactivation.
-- A configured local GitHub remote with pushing and Vercel deployment deferred.
+- A public GitHub `main` branch with Vercel deployment deferred.
 
 ## Excluded
 
