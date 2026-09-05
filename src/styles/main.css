@@ -39,13 +39,94 @@ body,
 
 #ui-root {
   position: absolute;
-  top: max(12px, env(safe-area-inset-top));
-  left: max(12px, env(safe-area-inset-left));
+  inset: 0;
   z-index: 2;
   pointer-events: none;
 }
 
+.world-spike {
+  display: grid;
+  gap: 12px;
+  width: min(360px, calc(100vw - 24px));
+  max-height: calc(100vh - 88px);
+  margin-top: 72px;
+  padding: 16px;
+  overflow: auto;
+  border: 1px solid rgb(255 194 71 / 70%);
+  border-radius: 8px;
+  background: rgb(25 31 27 / 96%);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 35%);
+  pointer-events: auto;
+}
+
+.world-spike h1,
+.world-spike p {
+  margin: 0;
+}
+
+.world-spike h1 {
+  color: #ffc247;
+  font-size: 17px;
+}
+
+.world-spike p,
+.world-spike__link,
+.world-spike button {
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.world-spike__status {
+  color: #bcd9bf;
+}
+
+.world-spike[data-state="error"] .world-spike__status {
+  color: #ff9b7f;
+}
+
+.world-spike[data-state="success"] .world-spike__status {
+  color: #7acb81;
+}
+
+.world-spike__qr {
+  width: 220px;
+  height: 220px;
+  justify-self: center;
+  border: 8px solid #fff;
+  border-radius: 6px;
+  image-rendering: auto;
+}
+
+.world-spike__link {
+  color: #78bdf2;
+  text-align: center;
+}
+
+.world-spike__controls {
+  display: flex;
+  gap: 8px;
+}
+
+.world-spike button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #ffc247;
+  border-radius: 5px;
+  color: #1d251f;
+  background: #ffc247;
+  cursor: pointer;
+}
+
+.world-spike button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
 .scout-panel {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  left: max(12px, env(safe-area-inset-left));
   display: grid;
   gap: 3px;
   min-width: 190px;
@@ -66,6 +147,120 @@ body,
 .scout-panel__status {
   color: #fff3cf;
   font-size: 11px;
+}
+
+.scout-panel__discovery {
+  color: #bcd9bf;
+  font-size: 10px;
+}
+
+.interaction-prompt,
+.dialogue-card {
+  position: absolute;
+  left: 50%;
+  display: grid;
+  width: min(360px, calc(100vw - 24px));
+  border: 1px solid rgb(255 194 71 / 70%);
+  border-radius: 6px;
+  color: #fff3cf;
+  background: rgb(31 36 32 / 94%);
+  box-shadow: 0 5px 18px rgb(0 0 0 / 28%);
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+.interaction-prompt {
+  bottom: max(12px, env(safe-area-inset-bottom));
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 9px 8px 12px;
+  font-size: 11px;
+}
+
+.dialogue-card {
+  bottom: max(12px, env(safe-area-inset-bottom));
+  gap: 6px;
+  padding: 12px;
+}
+
+.dialogue-card h2,
+.dialogue-card p {
+  margin: 0;
+}
+
+.dialogue-card h2 {
+  color: #ffc247;
+  font-size: 14px;
+}
+
+.dialogue-card p {
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.interaction-prompt button,
+.dialogue-card button,
+.move-button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid #ffc247;
+  border-radius: 5px;
+  color: #1d251f;
+  background: #ffc247;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.interaction-prompt button:focus-visible,
+.dialogue-card button:focus-visible,
+.move-button:focus-visible {
+  outline: 3px solid #78bdf2;
+  outline-offset: 2px;
+}
+
+.dialogue-card button {
+  justify-self: end;
+  padding: 8px 14px;
+}
+
+.mobile-controls {
+  position: absolute;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  display: none;
+  grid-template: repeat(2, 44px) / repeat(3, 44px);
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.move-button {
+  padding: 0;
+  color: #fff3cf;
+  background: rgb(31 36 32 / 90%);
+  font-size: 20px;
+  touch-action: none;
+}
+
+.move-button--up {
+  grid-column: 2;
+}
+.move-button--left {
+  grid-row: 2;
+  grid-column: 1;
+}
+.move-button--down {
+  grid-row: 2;
+  grid-column: 2;
+}
+.move-button--right {
+  grid-row: 2;
+  grid-column: 3;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 .scout-panel[data-state="connected"] {
@@ -90,5 +285,18 @@ body,
     content: "Rotate to landscape for the best view";
     font-size: 10px;
     text-align: center;
+  }
+}
+
+@media (pointer: coarse) and (orientation: landscape) {
+  .mobile-controls {
+    display: grid;
+  }
+
+  .interaction-prompt,
+  .dialogue-card {
+    left: max(12px, env(safe-area-inset-left));
+    width: min(330px, calc(100vw - 190px));
+    transform: none;
   }
 }
