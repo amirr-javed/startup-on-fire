@@ -2,6 +2,15 @@
 
 This document records material AI assistance for hackathon transparency. It does not imply that generated suggestions were accepted without human review.
 
+## SOF-002 — 2026-09-05
+
+- **Tool:** OpenAI Codex, including browser-based visual inspection.
+- **Purpose:** Select compatible package versions, create the Vite/Phaser/Convex application foundation, configure quality tools and CI, provision the development Convex deployment, and validate the rendered result.
+- **Human decisions:** Vanilla TypeScript UI shell, Phaser 3, cloud Convex, runnable sponsor spikes after the scaffold checkpoint, and approval-gated commits.
+- **Generated or modified areas:** Application source, tests, Convex health function/generated bindings, package/configuration files, CI, README, architecture/scope records, changelogs, decisions, and this disclosure.
+- **Validation performed by Codex:** Lint, strict typecheck, 13 unit tests, production build, realtime health subscription, responsive desktop/landscape/portrait checks, and browser console inspection.
+- **Limitations disclosed:** The Phaser bundle size warning is unresolved; CI and public deployment are untested until a remote exists; World and ENS behavior is not implemented or claimed in SOF-002.
+
 ## SOF-001 — 2026-09-05
 
 - **Tool:** OpenAI Codex.

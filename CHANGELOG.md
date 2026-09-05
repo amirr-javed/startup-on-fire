@@ -2,6 +2,10 @@
 
 This records planning revisions. It is not evidence that the game, Git repository, sponsor integrations, or runtime assets are implemented. Repository task IDs start at SOF-001 during Git initialization; planning changes use DOC identifiers.
 
+## SOF-002 — September 5, 2026 — Application foundation prepared
+
+Added the single-package Vite and strict TypeScript foundation, Phaser 3 pixel-rendering shell, compact DOM status overlay, Convex health subscription, unit tests, linting/formatting configuration, CI, architecture and scope documentation, and exact local setup instructions. A cloud Convex development deployment was provisioned in Europe (Ireland). Local lint, typecheck, 13 tests, production build, responsive browser checks, and realtime connection checks pass. The builder approved the scaffold commit on September 5, 2026.
+
 ## SOF-001 — September 5, 2026 — Git baseline prepared
 
 Initialized the local repository on `main`, added secret-safe ignore rules, and created the detailed change, decision, prompt, and AI-usage records. The five planning files already present in the directory are preserved and disclosed as pre-existing inputs. No application, dependency, asset, sponsor integration, remote, or deployment was created. The builder approved the baseline commit on September 5, 2026.

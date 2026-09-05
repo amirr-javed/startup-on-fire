@@ -1,0 +1,94 @@
+:root {
+  color: #fff3cf;
+  background: #16251b;
+  font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#app {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 40%, rgb(255 194 71 / 10%), transparent 32%), #16251b;
+}
+
+#game-root {
+  position: absolute;
+  inset: 0;
+}
+
+#game-root canvas {
+  display: block;
+}
+
+#ui-root {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  left: max(12px, env(safe-area-inset-left));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.scout-panel {
+  display: grid;
+  gap: 3px;
+  min-width: 190px;
+  padding: 9px 11px;
+  border: 1px solid rgb(255 194 71 / 55%);
+  border-radius: 6px;
+  background: rgb(31 36 32 / 88%);
+  box-shadow: 0 5px 18px rgb(0 0 0 / 24%);
+}
+
+.scout-panel__eyebrow {
+  color: #ffc247;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.scout-panel__status {
+  color: #fff3cf;
+  font-size: 11px;
+}
+
+.scout-panel[data-state="connected"] {
+  border-color: #7acb81;
+}
+
+.scout-panel[data-state="error"] {
+  border-color: #ff805f;
+}
+
+@media (orientation: portrait) and (max-width: 700px) {
+  #app::after {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 2;
+    max-width: 190px;
+    padding: 7px 9px;
+    border-radius: 5px;
+    color: #fff3cf;
+    background: rgb(31 36 32 / 84%);
+    content: "Rotate to landscape for the best view";
+    font-size: 10px;
+    text-align: center;
+  }
+}
