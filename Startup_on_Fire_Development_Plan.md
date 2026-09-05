@@ -9,6 +9,10 @@
 **Secondary sponsor target:** ENS — ENSv2 on Sepolia  
 **Stretch sponsor target:** The Graph — AI Tooling or AI Use Case (From Scratch)
 
+## Current sequencing decision — core product first
+
+As of September 5, 2026, implementation prioritizes the playable core product before sponsor and publishing work. Build and stabilize the greybox plaza, movement, interactions, discovery loop, minigame, fire states, and server-authoritative realtime rules first. World, ENSv2 completion, public GitHub publishing, and Vercel deployment are deferred until that core loop works. Existing sponsor feasibility code remains disabled and may be re-enabled deliberately later. The day-by-day sections below remain a dependency reference, not the active execution order.
+
 ## 1. Product Mission
 
 Revision: September 5, 2026. This revision adds Git-first setup, task-level change tracking, and a runtime-asset delivery contract. It does not claim implementation progress or re-verify event/sponsor requirements. The dated schedule below remains a target, not a record of completed work; resume at the first unmet exit gate.
