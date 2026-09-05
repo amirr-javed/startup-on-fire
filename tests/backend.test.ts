@@ -18,9 +18,10 @@ describe("isHealthResponse", () => {
 
   it("reports missing configuration without opening a connection", () => {
     const statuses: BackendStatus[] = [];
-    const disconnect = connectToBackend(null, (status) => statuses.push(status));
+    const connection = connectToBackend(null, (status) => statuses.push(status));
 
     expect(statuses).toEqual([{ state: "not-configured" }]);
-    expect(disconnect()).toBeUndefined();
+    expect(connection.client).toBeNull();
+    expect(connection.disconnect()).toBeUndefined();
   });
 });

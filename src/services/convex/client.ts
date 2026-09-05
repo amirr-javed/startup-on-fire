@@ -1,31 +1,30 @@
 import { ConvexClient } from "convex/browser";
-import { makeFunctionReference } from "convex/server";
 
+import { api } from "../../../convex/_generated/api";
 import type { BackendStatus } from "../../types/backend";
 import { isHealthResponse } from "../../types/backend";
 
 export type BackendStatusListener = (status: BackendStatus) => void;
 
-const healthQuery = makeFunctionReference<
-  "query",
-  Record<string, never>,
-  { service: "convex"; status: "ok" }
->("health:status");
+export type BackendConnection = Readonly<{
+  client: ConvexClient | null;
+  disconnect: () => void;
+}>;
 
 export function connectToBackend(
   convexUrl: string | null,
   onStatus: BackendStatusListener,
-): () => void {
+): BackendConnection {
   if (convexUrl === null) {
     onStatus({ state: "not-configured" });
-    return () => undefined;
+    return { client: null, disconnect: () => undefined };
   }
 
   const client = new ConvexClient(convexUrl);
   onStatus({ state: "connecting" });
 
   const unsubscribe = client.onUpdate(
-    healthQuery,
+    api.health.status,
     {},
     (response: unknown) => {
       if (isHealthResponse(response)) {
@@ -39,8 +38,11 @@ export function connectToBackend(
     },
   );
 
-  return () => {
-    unsubscribe();
-    void client.close();
+  return {
+    client,
+    disconnect: () => {
+      unsubscribe();
+      void client.close();
+    },
   };
 }

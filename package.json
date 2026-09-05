@@ -9,9 +9,13 @@
     "pnpm": ">=10.18.3"
   },
   "scripts": {
+    "assets:generate": "node scripts/generate-pixel-assets.mjs",
+    "assets:validate": "node scripts/validate-assets.mjs",
     "dev": "vite",
     "dev:convex": "convex dev",
     "convex:once": "convex dev --once",
+    "spike:ens:read": "tsx --env-file-if-exists=.env.local scripts/ensv2/readiness.ts",
+    "spike:ens:write": "tsx --env-file-if-exists=.env.local scripts/ensv2/write-permissions.ts",
     "build": "tsc --noEmit && vite build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit --pretty false",
@@ -20,15 +24,20 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@worldcoin/idkit-core": "4.2.4",
     "convex": "1.45.0",
-    "phaser": "3.90.0"
+    "phaser": "3.90.0",
+    "qrcode": "1.5.4",
+    "viem": "2.56.3"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/node": "22.20.1",
+    "@types/qrcode": "1.5.6",
     "eslint": "10.10.0",
     "globals": "17.12.0",
     "prettier": "3.9.6",
+    "tsx": "4.23.13",
     "typescript": "6.0.3",
     "typescript-eslint": "8.69.0",
     "vite": "8.2.2",

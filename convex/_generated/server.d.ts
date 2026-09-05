@@ -30,6 +30,12 @@ import type { DataModel } from "./dataModel.js";
 type Env = {
   readonly CONVEX_CLOUD_URL: string;
   readonly CONVEX_SITE_URL: string;
+  readonly WORLD_ACTION: string | undefined;
+  readonly WORLD_APP_ID: string | undefined;
+  readonly WORLD_ENVIRONMENT: string | undefined;
+  readonly WORLD_RP_ID: string | undefined;
+  readonly WORLD_RP_SIGNING_KEY: string | undefined;
+  readonly WORLD_SPIKE_ENABLED: string | undefined;
 };
 
 /**

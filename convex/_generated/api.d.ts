@@ -9,6 +9,9 @@
  */
 
 import type * as health from "../health.js";
+import type * as lib_world from "../lib/world.js";
+import type * as worldActions from "../worldActions.js";
+import type * as worldStore from "../worldStore.js";
 
 import type {
   ApiFromModules,
@@ -18,6 +21,9 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   health: typeof health;
+  "lib/world": typeof lib_world;
+  worldActions: typeof worldActions;
+  worldStore: typeof worldStore;
 }>;
 
 /**
