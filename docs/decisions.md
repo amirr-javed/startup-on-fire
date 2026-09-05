@@ -2,6 +2,32 @@
 
 Important product and engineering decisions are appended here with truthful dates. Planned behavior is distinguished from implemented behavior.
 
+## 2026-09-05 — SOF-005 — Generated references do not bypass runtime asset requirements
+
+The image-generation output is retained only as style provenance because it has a background and incorrect scale. Runtime art is produced as deterministic exact-size RGBA PNGs with a manifest and hashes. This keeps the current batch original, reproducible, separately addressable, and honest about its greybox quality.
+
+## 2026-09-05 — SOF-005 — Use a typed DOM-to-Phaser input boundary
+
+Landscape touch buttons update a small `DigitalInput` service; Phaser remains responsible for movement and collision. Phaser publishes proximity and discovery state through `GameUiBridge`, while DOM/CSS owns prompts and dialogue. This preserves the architecture boundary and makes future input/UI behavior independently testable.
+
+## 2026-09-05 — SOF-004 — Prioritize the playable core
+
+- Build and stabilize the core game loop before completing sponsor integrations or public deployment.
+- Remove the World spike entry point from browser composition and require an explicit unset server flag before World actions can run. Retain its implementation for later reuse instead of deleting tested feasibility work.
+- Keep ENSv2 scripts offline and unused by runtime code until the core loop is stable.
+- Record the supplied GitHub repository as the local `origin`, but do not push, publish, or configure Vercel until separately authorized later.
+- Treat the earlier calendar as a dependency reference; this core-first decision controls the active implementation order.
+
+## 2026-09-05 — SOF-003 — Isolated sponsor feasibility boundaries
+
+- Load the World UI only behind `?spike=world` and a dynamic import. Use IDKit 4.2.4 invite-code mode with `selfieCheckLegacy`; keep Phaser and the default route provider-free.
+- Treat a Sandbox application as `production` IDKit traffic and reserve `staging` for the simulator, following current provider guidance.
+- Bind the proof to one configured action and a stable server-checked signal. Store only the action and canonical decimal nullifier in an atomically checked Convex table.
+- Reduce provider failures to small public error codes. Do not return, log, or persist raw World request, proof, verifier, or biometric payloads.
+- Use viem 2.56.3 for ENSv2. Run official Universal Resolver and CCIP-Read readiness names on mainnet, and run the ownership/permission experiment on the ENSv2 Sepolia deployment.
+- Resolve a name’s configured resolver immediately before every write attempt. A discovered resolver may be reported as evidence but must never become configuration or a hardcoded dependency.
+- Declare World variables in `convex/convex.config.ts` and access them through Convex's generated typed `env`; keep every value optional so an unconfigured deployment can render the intended setup state.
+
 ## 2026-09-05 — SOF-002 — Minimal typed application shell
 
 - Use a single-package vanilla TypeScript application. Phaser owns the canvas; small DOM modules own overlays; `ConvexClient` owns realtime browser transport. React is intentionally not introduced.
