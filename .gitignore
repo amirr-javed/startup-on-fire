@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Build and test output
+dist/
+build/
+coverage/
+.cache/
+.vite/
+.vitest/
+playwright-report/
+test-results/
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+
+# Convex local configuration and generated runtime state
+.convex/
+
+# Local deployment and provider state
+.vercel/
+
+# Secrets and private keys
+*.key
+*.pem
+*.p12
+*.pfx
+*.keystore
+*.mnemonic
+secrets/
+credentials/
+
+# Editor and operating-system files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
