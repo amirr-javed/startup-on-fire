@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "tileSize": 16,
+  "generatedAt": "2026-09-05",
+  "generator": "Codex deterministic PNG generator informed by the retained SOF-005 image reference",
+  "palette": {
+    "grass": "#468948",
+    "grassLight": "#539a4f",
+    "grassDark": "#346b3e",
+    "cream": "#fff1c7",
+    "creamDark": "#dcc48f",
+    "path": "#debe7e",
+    "pathLight": "#efd499",
+    "wood": "#844a26",
+    "woodLight": "#b56730",
+    "woodDark": "#4b2b1f",
+    "charcoal": "#262b2b",
+    "charcoalLight": "#49514e",
+    "ember": "#ee5c28",
+    "yellow": "#ffc247",
+    "blue": "#3687be",
+    "blueDark": "#1f537e",
+    "water": "#3daed6",
+    "skin1": "#eeae76",
+    "skin2": "#a66541",
+    "skin3": "#704635",
+    "hair": "#40251d",
+    "white": "#ffffff"
+  },
+  "assets": [
+    {
+      "id": "terrain",
+      "url": "/assets/terrain/terrain.png",
+      "width": 272,
+      "height": 16,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "frameCount": 17,
+      "opaque": true,
+      "origin": [
+        0,
+        0
+      ],
+      "collision": null,
+      "sha256": "a7bf2b698d69a39297725c27eec5c0106d5d85c4b827535b7f8b5ca6cd7f8bc3",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "booth-01",
+      "url": "/assets/buildings/booth-01.png",
+      "width": 96,
+      "height": 96,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "x": 16,
+        "y": 64,
+        "width": 64,
+        "height": 26
+      },
+      "sha256": "f25cc7d400431ac3cdcbb99c569fc3ed9532417b19a98547c334f6b093d022c2",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "booth-02",
+      "url": "/assets/buildings/booth-02.png",
+      "width": 96,
+      "height": 96,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "x": 16,
+        "y": 64,
+        "width": 64,
+        "height": 26
+      },
+      "sha256": "deb47fe0ec5df7953761b00a178f2b4fe13e9fa2982687072df58481a68dec2b",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "booth-03",
+      "url": "/assets/buildings/booth-03.png",
+      "width": 96,
+      "height": 96,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "x": 16,
+        "y": 64,
+        "width": 64,
+        "height": 26
+      },
+      "sha256": "21fdbfc636af4672f3082d62c95fb2937629b62feacd03c18c7a11b357fee394",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "fountain",
+      "url": "/assets/props/fountain.png",
+      "width": 48,
+      "height": 64,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "x": 8,
+        "y": 35,
+        "width": 32,
+        "height": 23
+      },
+      "sha256": "409f6015a90c88a54b81e1f8836ffb71fbe1d27e28cc68504f717901866d9a93",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "tree",
+      "url": "/assets/props/tree.png",
+      "width": 48,
+      "height": 64,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "80227fe1b4f3584867b2f20cc8942375c04d4f48357c6088ac5f52a96d56df53",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "shrub",
+      "url": "/assets/props/shrub.png",
+      "width": 16,
+      "height": 16,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "57c2ac9412a0b5927de658dc07efe4387f7113c758fff58117edb6914e4a68f8",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "bench",
+      "url": "/assets/props/bench.png",
+      "width": 32,
+      "height": 32,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "ff36dc4cfbb982af677b98e8c7e04ba8b2fd7792f49a73648417266d28eff103",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "lamp",
+      "url": "/assets/props/lamp.png",
+      "width": 16,
+      "height": 48,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "afdccd2c38b0ffecfdb2048db9d915cdee01ef3d160829bfcfd5029d3b0a946b",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "sign",
+      "url": "/assets/props/sign.png",
+      "width": 32,
+      "height": 32,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "3be20f516579ec0894e1c038b82af4c11be27161622610b3a2dfc784da5f2bac",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "scout-walk",
+      "url": "/assets/characters/scout-walk.png",
+      "width": 64,
+      "height": 128,
+      "frameWidth": 16,
+      "frameHeight": 32,
+      "frameCount": 16,
+      "rows": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "x": 4,
+        "y": 23,
+        "width": 8,
+        "height": 8
+      },
+      "animations": {
+        "fps": 8,
+        "idleFrames": [
+          0,
+          4,
+          8,
+          12
+        ]
+      },
+      "sha256": "c3395331bc8ccbad32a9226ec81160692777941d0ca4223f95a43213fa91e3d5",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "founder-01",
+      "url": "/assets/characters/founder-01.png",
+      "width": 16,
+      "height": 32,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "3d85a07586655eac90f9862ecc697d041b5218862b94207b70fe9e9159323e10",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "founder-02",
+      "url": "/assets/characters/founder-02.png",
+      "width": 16,
+      "height": 32,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "048523162148eb7c4e5734cf40729719df5dde290642abcc49fb7f75c304baee",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    },
+    {
+      "id": "founder-03",
+      "url": "/assets/characters/founder-03.png",
+      "width": 16,
+      "height": 32,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "sha256": "80b38361f9929cb0824a8fe262e53156be940a5d913b414fc21a2d70a9df41ef",
+      "sourceRevision": "SOF-005-v001",
+      "validation": "greybox-runtime-validated"
+    }
+  ]
+}

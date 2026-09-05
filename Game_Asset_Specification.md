@@ -1,6 +1,6 @@
 # Startup on Fire — Game Asset Specification
 
-Revision: September 5, 2026. Status: production contract; assets have NOT been generated or validated by this document update.
+Revision: September 5, 2026. Status: production contract; the SOF-005 greybox terrain, booth/prop, Scout, and founder batch now has runtime exports and validation evidence. Fire and minigame batches remain ungenerated.
 
 ## What “generate assets” means
 
@@ -18,17 +18,17 @@ Deliver reusable, individually addressable runtime art plus metadata and provena
 
 These dimensions are implementation targets, not claims about generated output. Confirm them against greybox collision footprints before production; log any revision.
 
-| Batch | Deliverable | Target and minimum contents |
-|---|---|---|
-| A: Terrain | terrain.png | 16×16 untrimmed tile grid: 4 grass variants, 9 path center/edge/corner tiles, 4 outer boundary transitions; record every index |
-| B: Booths | booth-01.png through booth-03.png | Three isolated 96×96 RGBA buildings with blank sign areas; ground footprint separate from roof overhang |
-| B: Props | fountain.png, tree.png, shrub.png, bench.png, lamp.png, sign.png | Separate transparent props; target fountain/tree 48×64, shrub 16×16, bench/sign 32×32, lamp 16×48 |
-| C: Player | scout-walk.png | 16×32 frames, four direction rows (down/left/right/up), four frames per row; 64×128 sheet; one designated idle frame per direction |
-| C: NPCs | founder-01.png through founder-03.png, ember-guide.png | Four distinct 16×32 idle sprites; animated idle and walking crowds are optional later |
-| D: Fire | fire-cold.png, fire-hot.png, fire-blazing.png | Each sheet 384×96: six 64×96 frames in one row with identical base anchor; visible fire grows inside the fixed frame |
-| D: Fire base | fire-pit.png | Separate 64×32 transparent stone/log base, aligned with all tiers |
-| E: Minigame | bug.png, hit.png | Four 16×16 bug frames; four 32×32 hit frames; explicit timing metadata |
-| F: Optional polish | fountain animation, fuel burst, crowd variants | Separate sheets only after required assets pass; define grids before generation |
+| Batch              | Deliverable                                                      | Target and minimum contents                                                                                                        |
+| ------------------ | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| A: Terrain         | terrain.png                                                      | 16×16 untrimmed tile grid: 4 grass variants, 9 path center/edge/corner tiles, 4 outer boundary transitions; record every index     |
+| B: Booths          | booth-01.png through booth-03.png                                | Three isolated 96×96 RGBA buildings with blank sign areas; ground footprint separate from roof overhang                            |
+| B: Props           | fountain.png, tree.png, shrub.png, bench.png, lamp.png, sign.png | Separate transparent props; target fountain/tree 48×64, shrub 16×16, bench/sign 32×32, lamp 16×48                                  |
+| C: Player          | scout-walk.png                                                   | 16×32 frames, four direction rows (down/left/right/up), four frames per row; 64×128 sheet; one designated idle frame per direction |
+| C: NPCs            | founder-01.png through founder-03.png, ember-guide.png           | Four distinct 16×32 idle sprites; animated idle and walking crowds are optional later                                              |
+| D: Fire            | fire-cold.png, fire-hot.png, fire-blazing.png                    | Each sheet 384×96: six 64×96 frames in one row with identical base anchor; visible fire grows inside the fixed frame               |
+| D: Fire base       | fire-pit.png                                                     | Separate 64×32 transparent stone/log base, aligned with all tiers                                                                  |
+| E: Minigame        | bug.png, hit.png                                                 | Four 16×16 bug frames; four 32×32 hit frames; explicit timing metadata                                                             |
+| F: Optional polish | fountain animation, fuel burst, crowd variants                   | Separate sheets only after required assets pass; define grids before generation                                                    |
 
 ## Export and metadata contract
 
