@@ -1,0 +1,36 @@
+{
+  "group_id": "4a74362a-a314-4ae1-acdc-67ab9db806b6",
+  "states": [
+    {
+      "character": {
+        "id": "e6031190-8492-4357-b07d-c7aede466cab",
+        "name": "Idle",
+        "prompt": "Young startup founder wearing a casual hoodie, cozy pixel art",
+        "size": {
+          "width": 48,
+          "height": 48
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-09-10T13:35:00.249195+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {}
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-09-10T13:39:32.911262"
+}
