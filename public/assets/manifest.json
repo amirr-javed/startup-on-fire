@@ -1,275 +1,351 @@
 {
-  "version": 1,
+  "version": 2,
   "tileSize": 16,
-  "generatedAt": "2026-09-05",
-  "generator": "Codex deterministic PNG generator informed by the retained SOF-005 image reference",
-  "palette": {
-    "grass": "#468948",
-    "grassLight": "#539a4f",
-    "grassDark": "#346b3e",
-    "cream": "#fff1c7",
-    "creamDark": "#dcc48f",
-    "path": "#debe7e",
-    "pathLight": "#efd499",
-    "wood": "#844a26",
-    "woodLight": "#b56730",
-    "woodDark": "#4b2b1f",
-    "charcoal": "#262b2b",
-    "charcoalLight": "#49514e",
-    "ember": "#ee5c28",
-    "yellow": "#ffc247",
-    "blue": "#3687be",
-    "blueDark": "#1f537e",
-    "water": "#3daed6",
-    "skin1": "#eeae76",
-    "skin2": "#a66541",
-    "skin3": "#704635",
-    "hair": "#40251d",
-    "white": "#ffffff"
-  },
+  "generatedAt": "2026-09-11",
+  "generator": "SOF-013 OpenAI image generation with exact runtime export",
   "assets": [
     {
       "id": "terrain",
-      "url": "/assets/terrain/terrain.png",
-      "width": 272,
-      "height": 16,
+      "url": "/assets/original/terrain/terrain.png",
       "frameWidth": 16,
       "frameHeight": 16,
-      "frameCount": 17,
-      "opaque": true,
       "origin": [
         0,
         0
       ],
       "collision": null,
-      "sha256": "a7bf2b698d69a39297725c27eec5c0106d5d85c4b827535b7f8b5ca6cd7f8bc3",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "width": 96,
+      "height": 48,
+      "sha256": "f40ad2c852e1c442262de16e372121a996a37726353776742af0cbbb3ca02d09",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     },
     {
       "id": "booth-01",
-      "url": "/assets/buildings/booth-01.png",
-      "width": 96,
-      "height": 96,
+      "url": "/assets/original/buildings/booth-01.png",
       "origin": [
         0.5,
         1
       ],
       "collision": {
-        "x": 16,
-        "y": 64,
-        "width": 64,
-        "height": 26
+        "width": 72,
+        "height": 24
       },
-      "sha256": "f25cc7d400431ac3cdcbb99c569fc3ed9532417b19a98547c334f6b093d022c2",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "width": 96,
+      "height": 96,
+      "sha256": "e72a0481027706d7537e41fa8cf5ca6a4f97c6e237e9900505f42c5ab0089bb0",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     },
     {
       "id": "booth-02",
-      "url": "/assets/buildings/booth-02.png",
-      "width": 96,
-      "height": 96,
+      "url": "/assets/original/buildings/booth-02.png",
       "origin": [
         0.5,
         1
       ],
       "collision": {
-        "x": 16,
-        "y": 64,
-        "width": 64,
-        "height": 26
+        "width": 72,
+        "height": 24
       },
-      "sha256": "deb47fe0ec5df7953761b00a178f2b4fe13e9fa2982687072df58481a68dec2b",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "width": 96,
+      "height": 96,
+      "sha256": "1fd57d8f3d562bdaf80f859e5400581be099688deda580ce3939b576d52bbe73",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     },
     {
       "id": "booth-03",
-      "url": "/assets/buildings/booth-03.png",
+      "url": "/assets/original/buildings/booth-03.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 72,
+        "height": 24
+      },
       "width": 96,
       "height": 96,
-      "origin": [
-        0.5,
-        1
-      ],
-      "collision": {
-        "x": 16,
-        "y": 64,
-        "width": 64,
-        "height": 26
-      },
-      "sha256": "21fdbfc636af4672f3082d62c95fb2937629b62feacd03c18c7a11b357fee394",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
-    },
-    {
-      "id": "fountain",
-      "url": "/assets/props/fountain.png",
-      "width": 48,
-      "height": 64,
-      "origin": [
-        0.5,
-        1
-      ],
-      "collision": {
-        "x": 8,
-        "y": 35,
-        "width": 32,
-        "height": 23
-      },
-      "sha256": "409f6015a90c88a54b81e1f8836ffb71fbe1d27e28cc68504f717901866d9a93",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
-    },
-    {
-      "id": "tree",
-      "url": "/assets/props/tree.png",
-      "width": 48,
-      "height": 64,
-      "origin": [
-        0.5,
-        1
-      ],
-      "collision": null,
-      "sha256": "80227fe1b4f3584867b2f20cc8942375c04d4f48357c6088ac5f52a96d56df53",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
-    },
-    {
-      "id": "shrub",
-      "url": "/assets/props/shrub.png",
-      "width": 16,
-      "height": 16,
-      "origin": [
-        0.5,
-        1
-      ],
-      "collision": null,
-      "sha256": "57c2ac9412a0b5927de658dc07efe4387f7113c758fff58117edb6914e4a68f8",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
-    },
-    {
-      "id": "bench",
-      "url": "/assets/props/bench.png",
-      "width": 32,
-      "height": 32,
-      "origin": [
-        0.5,
-        1
-      ],
-      "collision": null,
-      "sha256": "ff36dc4cfbb982af677b98e8c7e04ba8b2fd7792f49a73648417266d28eff103",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
-    },
-    {
-      "id": "lamp",
-      "url": "/assets/props/lamp.png",
-      "width": 16,
-      "height": 48,
-      "origin": [
-        0.5,
-        1
-      ],
-      "collision": null,
-      "sha256": "afdccd2c38b0ffecfdb2048db9d915cdee01ef3d160829bfcfd5029d3b0a946b",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
-    },
-    {
-      "id": "sign",
-      "url": "/assets/props/sign.png",
-      "width": 32,
-      "height": 32,
-      "origin": [
-        0.5,
-        1
-      ],
-      "collision": null,
-      "sha256": "3be20f516579ec0894e1c038b82af4c11be27161622610b3a2dfc784da5f2bac",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "sha256": "e23dc3623189058044169830f18069ab94d3ae8f88ad86c862b4b1904c72146a",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     },
     {
       "id": "scout-walk",
-      "url": "/assets/characters/scout-walk.png",
-      "width": 64,
-      "height": 128,
+      "url": "/assets/original/characters/scout-walk.png",
       "frameWidth": 16,
       "frameHeight": 32,
-      "frameCount": 16,
-      "rows": [
-        "down",
-        "left",
-        "right",
-        "up"
-      ],
       "origin": [
         0.5,
         1
       ],
       "collision": {
-        "x": 4,
-        "y": 23,
-        "width": 8,
-        "height": 8
+        "x": 3,
+        "y": 19,
+        "width": 10,
+        "height": 12
       },
-      "animations": {
-        "fps": 8,
-        "idleFrames": [
-          0,
-          4,
-          8,
-          12
-        ]
-      },
-      "sha256": "c3395331bc8ccbad32a9226ec81160692777941d0ca4223f95a43213fa91e3d5",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "width": 64,
+      "height": 128,
+      "sha256": "4907f386e9abcbffe854e5f5f0f7f6411ed2fb8b67105c518f9fa4336a286d6e",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     },
     {
       "id": "founder-01",
-      "url": "/assets/characters/founder-01.png",
-      "width": 16,
-      "height": 32,
+      "url": "/assets/original/characters/founder-01.png",
       "origin": [
         0.5,
         1
       ],
       "collision": null,
-      "sha256": "3d85a07586655eac90f9862ecc697d041b5218862b94207b70fe9e9159323e10",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "width": 16,
+      "height": 32,
+      "sha256": "8469467bf04afeb2d0bf707c01ebfee50f682dae2ed943fbf7297c95021e109f",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     },
     {
       "id": "founder-02",
-      "url": "/assets/characters/founder-02.png",
-      "width": 16,
-      "height": 32,
+      "url": "/assets/original/characters/founder-02.png",
       "origin": [
         0.5,
         1
       ],
       "collision": null,
-      "sha256": "048523162148eb7c4e5734cf40729719df5dde290642abcc49fb7f75c304baee",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "width": 16,
+      "height": 32,
+      "sha256": "e540ec0b67995d56f5c126921e7a816063c29be426eb3eb8c4cd45104e6ce5b9",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     },
     {
       "id": "founder-03",
-      "url": "/assets/characters/founder-03.png",
-      "width": 16,
-      "height": 32,
+      "url": "/assets/original/characters/founder-03.png",
       "origin": [
         0.5,
         1
       ],
       "collision": null,
-      "sha256": "80b38361f9929cb0824a8fe262e53156be940a5d913b414fc21a2d70a9df41ef",
-      "sourceRevision": "SOF-005-v001",
-      "validation": "greybox-runtime-validated"
+      "width": 16,
+      "height": 32,
+      "sha256": "8935a1c153e781737de1182f415531e43aaa4ca091999f9c4a9d147d956abae2",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "ember-guide",
+      "url": "/assets/original/characters/ember-guide.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "width": 16,
+      "height": 32,
+      "sha256": "7092822c5752d7c1218386c6bb3d07f63ada13ce21e725a38fd6786084163346",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "fountain",
+      "url": "/assets/original/props/fountain.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 48,
+        "height": 24
+      },
+      "width": 48,
+      "height": 64,
+      "sha256": "8c327bf9bdf2c8aff1dc70c7b6cda9326fea41abf667a65787e521f0620367d2",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "tree",
+      "url": "/assets/original/props/tree.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 28,
+        "height": 16
+      },
+      "width": 48,
+      "height": 64,
+      "sha256": "bb4d38c6524f0e21128609e8f7725145f47861b87a72575db6f824e603b7e4ee",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "shrub",
+      "url": "/assets/original/props/shrub.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 12,
+        "height": 8
+      },
+      "width": 16,
+      "height": 16,
+      "sha256": "02f152e8184d1062464898e326b7cb7a99838823c328492d8389993e5e2eb8de",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "bench",
+      "url": "/assets/original/props/bench.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 28,
+        "height": 10
+      },
+      "width": 32,
+      "height": 32,
+      "sha256": "1d4b790144eae3723dd735b87bdeef5330e34fa4f7280f933796d253254666a5",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "sign",
+      "url": "/assets/original/props/sign.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 12,
+        "height": 8
+      },
+      "width": 32,
+      "height": 32,
+      "sha256": "3917551d982cb069528b53a8bd45c868d155a668ffd07e2c105428398cf39ef5",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "lamp",
+      "url": "/assets/original/props/lamp.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 8,
+        "height": 8
+      },
+      "width": 16,
+      "height": 48,
+      "sha256": "bea05885212233e4d9f599c5ab29e81dfe4f4186e40e233bfde676916735221d",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "fire-pit",
+      "url": "/assets/original/fire/fire-pit.png",
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": {
+        "width": 48,
+        "height": 18
+      },
+      "width": 64,
+      "height": 32,
+      "sha256": "557ac2d4a1f03fc94274a63f148833af6edc2df06c3b9a9a20ff7acc188364af",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "fire-cold",
+      "url": "/assets/original/fire/fire-cold.png",
+      "frameWidth": 64,
+      "frameHeight": 96,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "width": 384,
+      "height": 96,
+      "sha256": "e7e19eb4dd6ee60966651cb3486ef044138ddda11786862200dc38fde5c4934c",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "fire-hot",
+      "url": "/assets/original/fire/fire-hot.png",
+      "frameWidth": 64,
+      "frameHeight": 96,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "width": 384,
+      "height": 96,
+      "sha256": "c3cff734712cf1d16f1f5f0afeec89c24aa054f5843db09b6054105bdcac5f11",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "fire-blazing",
+      "url": "/assets/original/fire/fire-blazing.png",
+      "frameWidth": 64,
+      "frameHeight": 96,
+      "origin": [
+        0.5,
+        1
+      ],
+      "collision": null,
+      "width": 384,
+      "height": 96,
+      "sha256": "a59de17e4647e26d90701adedefb6940b8d472130fa35f7094949999abdaea85",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "bug",
+      "url": "/assets/original/minigame/bug.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "collision": null,
+      "width": 64,
+      "height": 16,
+      "sha256": "7632d226479a9d8331dc53c19f8f42713c8478a8d45bc0fbe3eb3fdd07518122",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
+    },
+    {
+      "id": "hit",
+      "url": "/assets/original/minigame/hit.png",
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "collision": null,
+      "width": 128,
+      "height": 32,
+      "sha256": "3e9ed85b316ad7121d7b2f67103810436d351dfc49fbc7d8bb4edb58923e5bd8",
+      "sourceRevision": "SOF-013-v001",
+      "validation": "dimensions-alpha-frame-grid-browser-validated"
     }
   ]
 }
