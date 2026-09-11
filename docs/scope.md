@@ -1,10 +1,10 @@
 # Startup on Fire — Core Scope
 
-## Active core slice — SOF-005
+## Active core slice — SOF-015
 
-Included: one compact plaza, three booths/founders, fountain, keyboard movement, landscape touch controls, camera follow, booth/fountain collision, contextual booth interaction, and the initial greybox runtime asset batch.
+Included: one compact plaza, three booths/founders, keyboard and landscape touch movement, contextual founder interaction, guided first-run onboarding, one complete Kindred Labs Bug Squash quest, an explicitly non-public Practice Spark, fixed realtime booth state, protected guest sessions, server-recorded quest completion, and atomic/idempotent verified-fuel rules.
 
-Deferred: full founder dialogue, quests, Bug Squash, fire/fuel behavior, backend gameplay state, World, ENS, GitHub push, Vercel, production deployment, and optional polish.
+Deferred: the player-facing World/fuel flow, provider-backed acceptance evidence, final Convex deployment, ENS runtime identity, Vercel/public deployment, and optional quests for the other two booths.
 
 ## Included
 
@@ -18,9 +18,9 @@ Deferred: full founder dialogue, quests, Bug Squash, fire/fuel behavior, backend
 
 ## Excluded
 
-- Plaza gameplay, player movement, booths, NPC dialogue, quests, and fuel mechanics.
-- Runtime art or concept-art generation.
-- Final World verification, ENS booth identity, or server-authoritative voting integration.
+- Directory/search, founder submission/admin tools, extra districts, and additional minigames.
+- Coins, inventory, cosmetics, chat, NFTs, tokens, swaps, DeFi, or pay-to-fuel behavior.
+- Final World verification UI, ENS booth identity, and production deployment until their explicit integration tasks.
 - Foundry, The Graph, authentication, wallets for ordinary exploration, and all P1/P2 features.
 
 ## Phase 1 exit gate

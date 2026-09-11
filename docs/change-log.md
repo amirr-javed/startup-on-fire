@@ -2,6 +2,118 @@
 
 This log records implementation tasks using actual dates and verified results. A task's commit is identified by the task ID in its commit message; a commit cannot contain its own hash.
 
+## SOF-015 — Add authoritative quest, realtime fire, and verified-fuel rules
+
+- **Date/time:** 2026-09-11 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Continue the reviewed priorities at a high quality bar. Make sessions, quest completion, public-fuel eligibility, daily limits, score, tier, and UTC date server-authoritative while preserving guest exploration and the honest Practice Spark.
+- **Starting repository state:** SOF-007 through SOF-014 changes and local assistant configuration paths were already uncommitted. They were preserved. Convex contained only health and the disabled World feasibility store/action.
+- **Changed paths:** Added `convex/booths.ts`, `convex/gameActions.ts`, `convex/gameStore.ts`, `convex/game.test.ts`, `convex/lib/game.ts`, `convex/lib/security.ts`, and `src/types/gameplay.ts`; expanded the schema, World store/action, generated API binding, Convex browser adapter, game composition, Plaza/Bug Squash scenes, UI bridge/shell, dependencies, Vitest configuration, documentation, and prompt archive.
+- **Reason and before/after behavior:** Previously quest truth and fire growth were in-memory only. Convex now issues hashed opaque guest sessions, defines three fixed realtime booths, records idempotent/rate-bounded hits, derives completion from stored hits and server time, binds a verified World nullifier to an action-scoped session, and atomically enforces one fuel per booth plus three total fuels per server-derived UTC day. The browser persists only the opaque token, subscribes to realtime fire states, and shows preparing/completing/retry states. Practice Spark still cannot change public score.
+- **Security and privacy:** Client score, tier, verification state, date, and timestamps are ignored. Fuel requires server quest progress plus a server-bound World identity. World challenges use a namespace-separated signal derived from the guest token hash, preventing a valid proof from being detached and rebound to another guest session. Only a token hash and the minimum action/nullifier identity are stored; no selfie or raw proof is persisted or logged. A modified client can automate validly spaced hit calls, so World—not hit timing—is the public human-eligibility control.
+- **Dependencies/configuration/data/art affected:** Added development-only `convex-test` and `@edge-runtime/vm`; expanded Convex tables and indexes. No production dependency or art changed in this task.
+- **Validation:** Frozen offline dependency installation passed. `pnpm lint`, `pnpm typecheck`, `pnpm test` (8 files, 44 tests, including 11 focused Convex cases), and `pnpm build` pass. Focused lint and Convex TypeScript checks also pass. The known Phaser bundle warning remains at 1,292.33 kB minified / 346.80 kB gzip. Browser validation confirmed realtime health/plaza rendering, protected quest preparation, and the recoverable sync-error screen without awarding completion when the final actions were absent from the deployment.
+- **External-state disclosure:** `pnpm exec convex codegen --typecheck disable` unexpectedly printed `Uploading functions to Convex` and likely touched the configured development deployment. It completed before intervention. No subsequent Convex CLI/deploy command was run, and no rollback was attempted without builder direction. The final SOF-015 action set was not available in browser validation.
+- **Checks not run:** Final Convex deployment, server-success browser quest, multi-client realtime propagation, real World Selfie Check/replay, public fuel UI, physical-device testing, ENS runtime integration, and public deployment remain pending.
+- **AI assistance:** Codex used the installed Convex design/expert guidance and a delegated backend specialist, then reviewed, integrated, tested, browser-checked, and documented the result. Prompt: `docs/prompts/SOF-015-authoritative-game-backend.md`.
+- **Risks and rollback:** Realtime browser behavior depends on deploying the matching functions. A lost local token after World binding cannot be silently reconstructed. Roll back the SOF-015 paths while preserving SOF-014 to return to the local Practice Spark loop.
+- **Commit status:** Builder authorized focused checkpoints. Backend commit `f2519e1` uses `feat(SOF-015): add authoritative game backend`; browser integration is included in dependent commit `a0f3828`.
+
+## SOF-014 — Build the guided first quest and Bug Squash loop
+
+- **Date/time:** 2026-09-11 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Start the prioritized improvements at a high quality bar. Give first-time players clear orientation and deliver one complete founder → minigame → earned-feedback loop before expanding sponsor behavior.
+- **Starting repository state:** SOF-007 through SOF-013 asset, scene, layout, style, test, and documentation work was already uncommitted. Those changes and local assistant configuration paths were preserved; overlapping scene/UI/style files were extended without reverting the accepted SOF-013 pack.
+- **Changed paths:** Added `src/game/quests/QuestSession.ts`, `src/game/quests/questContent.ts`, `src/game/scenes/BugSquashScene.ts`, `tests/quest-flow.test.ts`, and `docs/prompts/SOF-014-guided-first-quest.md`; modified the game configuration, plaza scene, UI bridge/input, app shell/styles, plaza tests, README, scope/architecture/decisions, both changelogs, and AI-use record.
+- **Reason and before/after behavior:** Previously the player spawned without explanation and founder dialogue promised a later slice. Now Ember introduces the city and its earned-fire rule, the HUD gives a first objective, all founders have distinct product copy, and Maya launches a 30-second Bug Squash round. Eight hits produce a success state, return the player near Maya, and award a clearly labelled Practice Spark whose Cold-to-Hot animation remains local-only.
+- **Dependencies/configuration/data/art affected:** No package, Convex schema, external provider, secret, or runtime asset change. The existing SOF-013 bug/hit/fire sheets are now exercised in-engine. Quest progress is intentionally in-memory and refresh-reset; it is not public-fuel truth.
+- **Validation:** `pnpm assets:validate` passed all 21 manifest PNG/hash/grid checks. `pnpm lint`, `pnpm typecheck`, `pnpm test` (7 files, 33 tests), and `pnpm build` passed; the known Phaser chunk-size warning remains at 1,286.80 kB minified / 345.13 kB gzip. The live browser walkthrough verified both onboarding steps, quest marker/objective, Maya’s two-step dialogue, the Bug Squash board at 30 seconds, pointer/keyboard-equivalent accessible control, 8/8 success, return placement beside Maya, honest Practice Spark disclosure, Cold-to-Hot fire growth, follow-up objective, and empty browser warning/error logs. Clean-load viewport checks passed at 844×390 landscape and 375×667 portrait, including readable onboarding and portrait rotation guidance. The first live run exposed an inherited-clock bug that ended the round immediately; the timer was changed to per-round delta accumulation and the full replay then passed.
+- **Checks not run:** Physical mobile touch testing and server-authoritative/realtime multi-client behavior remain pending. Repository-wide `pnpm format:check` still reports pre-existing formatting issues in unrelated assistant skill files, source planning documents, one asset metadata file, the manifest, and the SOF-013 export script; every SOF-014-owned path was formatted directly with Prettier.
+- **AI assistance:** Codex implemented, reviewed, tested, visually exercised, and documented this slice. Prompt record: `docs/prompts/SOF-014-guided-first-quest.md`.
+- **Risks and rollback:** Practice progress resets on refresh by design until Convex quest persistence is added. Physical-device pointer-capture behavior remains to be tested. Roll back the SOF-014 paths and edits while retaining the SOF-013 asset pack and earlier scene composition.
+- **Commit status:** Committed as `a0f3828` with `feat(SOF-014): add guided protected quest loop` after lint, typecheck, 44 tests, and build passed.
+
+## SOF-013 — Generate and integrate the complete original runtime asset pack
+
+- **Date/time:** 2026-09-11 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Use OpenAI image generation to build every required asset in `Game_Asset_Specification.md`, use no Kenney Tiny Farm content, produce separately addressable exact-size runtime PNGs, integrate the pack, and validate it in Phaser.
+- **Starting repository state:** SOF-007 through SOF-012 were uncommitted. The live scene used builder-supplied terrain/Scout images and large SOF-007 extractions. The Kenney source/runtime directories were already absent. All unrelated existing work was preserved.
+- **Changed paths:** Added `art/revisions/SOF-013-v001/raw/` (22 retained raw/revision images), `public/assets/original/` (21 runtime PNGs), `scripts/export-generated-assets.mjs`, and `docs/prompts/SOF-013-generate-complete-original-asset-pack.md`; modified `scripts/generate-pixel-assets.mjs`, `public/assets/manifest.json`, `src/game/scenes/PlazaScene.ts`, `src/game/world/plazaLayout.ts`, `tests/plaza.test.ts`, `CHANGELOG.md`, `docs/assets.md`, `docs/asset-validation.md`, `docs/decisions.md`, `docs/change-log.md`, and `docs/ai-usage.md`.
+- **Reason and before/after behavior:** Before this task the runtime inventory lacked all fire, fire-pit, Bug Squash, Ember guide, production Scout walk, and coherent exact-size terrain/prop exports. Afterward the manifest contains one coherent 21-file original pack. The plaza renders its 16×16 terrain/path tiles, three distinct 96×96 booths, three founders, Ember, animated four-direction Scout, fountain/trees/benches/sign/lamps, and Cold/Hot/Blazing six-frame fires.
+- **Dependencies/configuration/data/art affected:** No package dependency, backend, provider, secret, or player-data change. The reproducible export script uses the pre-existing local `ffmpeg`/`ffprobe` tools for alpha-bounds cropping, nearest-neighbour scaling, transparent padding, and sheet assembly. Older supplied/polished files remain as retained rollback art but are absent from the runtime manifest.
+- **Generation and revision record:** 21 distinct generation calls created terrain, three booths, Scout, four NPCs, six environmental props, three fire tiers, fire pit, bug, and hit effect. A terrain edit removed model-added dividers but baked a checkerboard, so the accepted runtime terrain is mechanically assembled from the transparent first revision with the divider pixels excluded. Raw outputs are never claimed as engine-ready.
+- **Validation:** `pnpm assets:generate` exported 21 files; `pnpm assets:validate` verified 21 RGBA PNG dimensions, hashes, and frame divisibility; `pnpm lint`, `pnpm typecheck`, `pnpm test` (6 files, 26 tests), and `pnpm build` passed. Production build retains the existing Phaser chunk-size warning. Live review at `http://localhost:5173/` after reload confirmed the generated terrain, path, props, characters, booths, animated fires, HUD, interaction prompt, and realtime-connected status render without a missing-texture screen.
+- **Checks not run:** Physical mobile touch testing, automated traversal to all three booths, and frame-by-frame animation capture remain pending. Bug/hit sheets are preloaded and structurally validated; the Bug Squash scene itself is outside this asset task and does not yet visually exercise them.
+- **AI assistance:** OpenAI image generation produced the retained raw artwork; Codex authored the exact export pipeline, integration, tests, documentation, and verification. Prompt record: `docs/prompts/SOF-013-generate-complete-original-asset-pack.md`.
+- **Risks and rollback:** Generated details become very compact at native 16×16/16×32 resolution, and animation continuity has been inspected as sheets/live fire rather than captured frame-by-frame. Roll back by restoring the prior manifest/layout references; retained supplied and SOF-007 art was not deleted.
+- **Commit status:** Committed as `93e550e` with `feat(SOF-013): add original runtime asset pack` after all 21 manifest assets passed validation.
+
+## SOF-012 — Remove Kenney Tiny Farm and restore original assets
+
+- **Date/time:** 2026-09-11 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Remove all Kenney Tiny Farm assets and return to the builder's original artwork.
+- **Starting repository state:** The Kenney sheet had been temporarily integrated into the uncommitted SOF-010 work. The original supplied terrain/Scout and polished booth/founder/fountain assets remained present.
+- **Changed paths:** Removed `assest/kenney_tiny-farm/` and `public/assets/kenney-tiny-farm/`; modified `src/game/scenes/PreloadScene.ts`, `src/game/scenes/PlazaScene.ts`, `scripts/generate-pixel-assets.mjs`, `public/assets/manifest.json`, `CHANGELOG.md`, `docs/assets.md`, `docs/asset-validation.md`, `docs/change-log.md`, `docs/ai-usage.md`, and `docs/prompts/SOF-012-remove-kenney-tiny-farm.md`.
+- **Reason and before/after behavior:** The live scene no longer loads the Kenney sheet, crop-path tiles, or farm props. It renders only the original supplied grass terrain, Scout, booths, founders, and fountain.
+- **Dependencies/configuration/data affected:** No dependency, provider, backend, or secret changes. Two verified Kenney directories (143 files, 178,950 bytes combined) were permanently removed under the builder's explicit direction.
+- **Validation:** `pnpm assets:generate`, `pnpm assets:validate` (32 assets), `pnpm lint`, `pnpm typecheck`, `pnpm test` (6 files, 26 tests), and `pnpm build` passed. Browser inspection at `http://localhost:5173/` confirmed only the original grass terrain, Scout, booth, founder, fountain, HUD, and interaction prompt load; no Kenney texture is requested or rendered. The existing production-build warning about a JavaScript chunk larger than 500 kB remains.
+- **Risks and pending work:** The original asset set intentionally has a sparse plaza background. Any future visual change should use only specifically approved original assets.
+- **Commit status:** Historical prompt preserved as `396efb4` (`docs(SOF-012): archive original asset restoration prompt`). Kenney files had never entered Git; the clean final runtime replacement is captured by `93e550e`.
+
+## SOF-011 — Prune confirmed-unused fallback assets
+
+- **Date/time:** 2026-09-11 PKT (UTC+05:00)
+- **Request and outcome:** During the preceding asset audit, removed 30 confirmed-unused runtime files: the old generated fallback pack and duplicated uncleaned background copies. The remaining current assets were retained.
+- **Important reversal:** Kenney Tiny Farm was subsequently removed in SOF-012 at the builder's request; no Kenney asset remains in the final runtime set.
+- **Commit status:** No standalone content commit exists because the pruned files belonged to an uncommitted experiment. The surviving final inventory is captured by `93e550e`.
+
+## SOF-010 — Integrate Kenney Tiny Farm runtime assets
+
+- **Date/time:** 2026-09-11 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Use the local `kenney_tiny-farm` asset pack in the live plaza.
+- **Starting repository state:** SOF-007 through SOF-009 remain uncommitted and are preserved. The builder-supplied CC0 asset pack was already present under `assest/kenney_tiny-farm/`.
+- **Changed paths:** Added `public/assets/kenney-tiny-farm/tilemap.png` and `LICENSE.txt`; modified `src/game/scenes/PreloadScene.ts`, `src/game/scenes/PlazaScene.ts`, `scripts/generate-pixel-assets.mjs`, `scripts/validate-assets.mjs`, `public/assets/manifest.json`, `CHANGELOG.md`, `docs/assets.md`, `docs/asset-validation.md`, `docs/change-log.md`, `docs/ai-usage.md`, and `docs/prompts/SOF-010-integrate-kenney-tiny-farm.md`.
+- **Reason and before/after behavior:** The plaza formerly used a generic route and prop set over supplied grass. It now preserves the supplied grass base while loading the 16×16 Kenney Tiny Farm sheet with its required one-pixel frame spacing. Farm dirt paths, trees, flowers, and planters visibly dress the routes and garden edges.
+- **Dependencies/configuration/data/art affected:** No dependency, backend, provider, or secret changes. Tiny Farm 1.0 is CC0 1.0 according to its included license; source and runtime license copies are retained.
+- **Validation:** `pnpm assets:generate`, `pnpm assets:validate` (47 assets), `pnpm lint`, `pnpm typecheck`, `pnpm test` (6 files, 26 tests), and `pnpm build` passed. Browser review at `http://localhost:5173/` confirmed the Tiny Farm sheet, transparent tiles, dirt path, trees, flowers, and planters render through Phaser; existing connected-status and booth interaction remain visible. The existing production-build warning about a JavaScript chunk larger than 500 kB remains.
+- **Risks and pending work:** The map is intentionally a mixed asset set (Kenney landscape with existing supplied booth/character art). A complete stylistic unification is a separately scoped art task.
+- **Commit status:** Historical prompt preserved as `f039a6a` (`docs(SOF-010): archive temporary asset integration prompt`). The temporary Kenney runtime was intentionally never committed and is absent from the final pack.
+
+## SOF-009 — Restore a cohesive tile-aligned plaza ground
+
+- **Date/time:** 2026-09-11 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Replace the poor-looking plaza background with a cohesive game-ready ground treatment.
+- **Starting repository state:** The builder's uncommitted SOF-007/SOF-008 source, asset, documentation, and layout work was already present and is preserved.
+- **Changed paths:** `src/game/scenes/PlazaScene.ts`, `src/styles/main.css`, `tests/plaza.test.ts`, `CHANGELOG.md`, `docs/change-log.md`, `docs/ai-usage.md`, and `docs/prompts/SOF-009-improve-plaza-background.md`.
+- **Reason and before/after behavior:** The SOF-008 integration rendered the builder-supplied 4×4 terrain field without the purposeful plaza paths, leaving a sparse field. The scene now keeps those supplied assets as the active ground and overlays the existing 16×16 path tiles where the typed layout declares paths; four garden corners, shrubs, benches, lamps, and signs give the plaza a defined edge. Letterbox space now uses a matching subtle grass grid rather than dark bars.
+- **Dependencies/configuration/data/art affected:** No dependency, backend, provider, or runtime-art file changes. No asset is deleted or replaced.
+- **Validation:** `pnpm lint`, `pnpm typecheck`, `pnpm test` (6 files, 26 tests), and `pnpm build` passed. Browser inspection at `http://localhost:5173/` confirmed the supplied grass field, paved fountain/booth routes, sprites, and connected status render together. The existing production-build warning about a JavaScript chunk larger than 500 kB remains.
+- **Risks and pending work:** This is a composition correction using the supplied terrain and existing path assets, not a new final terrain asset batch. Source-tile cleanup remains a later deliberate asset task.
+- **Commit status:** Historical prompt preserved as `4c47c11` (`docs(SOF-009): archive plaza restoration prompt`); its surviving final layout/assets are included in `93e550e`.
+
+## SOF-008 — Integrate supplied terrain and Scout directions
+
+- **Date/time:** 2026-09-10 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Use the newly supplied art assets in the game and start the local server.
+- **Starting repository state:** SOF-007's uncommitted art/code/documentation changes and local guidance directories were already present and are preserved. The builder-supplied files arrived under `assest/`.
+- **Changed paths:** Added 16 cleaned runtime ground tiles and eight Scout direction files under `public/assets/supplied/`; registered them in the asset manifest; updated the asset generator and plaza scene/layout; added provenance/validation/AI/prompt records.
+- **Reason and before/after behavior:** The plaza previously used the deterministic terrain strip and its original animated Scout. It now assembles the supplied 4×4 field as a 576×576 ground layer and faces the supplied Scout art in eight directions while retaining existing booth, founder, fountain, collision, interaction, and UI assets.
+- **Dependencies/configuration/data affected:** No dependency, backend, provider, or secret change. The bottom booth moves farther south to use the expanded world. Original supplied files remain unchanged under `assest/`; cropped runtime derivatives remove export borders.
+- **Validation:** `pnpm assets:validate`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, and `pnpm build` completed successfully. Browser inspection at `http://127.0.0.1:5173/` showed the field, Scout, booth interaction prompt, and realtime backend connection; Vite responds HTTP 200.
+- **Risks and pending work:** The eight supplied player files are direction-specific idle poses, not a walk-cycle sheet. The generated ground tiles have a subtle tone transition along one horizontal source-row boundary; this is a source-art continuity issue, not a missing/white export border.
+- **Commit status:** Source/provenance committed as `31c6803` with `chore(SOF-008): preserve supplied terrain and scout sources`; final runtime selection is captured by SOF-013.
+
+## SOF-007 — Integrate builder-supplied artwork
+
+- **Date/time:** 2026-09-05 PKT (UTC+05:00)
+- **Request and acceptance criteria:** Add the supplied asset artwork to the live game while respecting the runtime asset contract.
+- **Starting repository state:** `main` matched the public GitHub remote at SOF-006. Only local assistant/Convex guidance paths were dirty and remain outside this task.
+- **Changed paths:** Added eight source revisions and eight polished runtime PNGs; extended the manifest generator; switched booth, founder, fountain, and HUD textures; updated layout sizes, tests, provenance, validation, changelog, AI-use, and prompt records.
+- **Reason and before/after behavior:** The live plaza previously used deterministic greybox art inspired by the supplied sheet. It now renders separately extracted transparent versions of the supplied visual designs while retaining v001 fallbacks and the animated movement sheet.
+- **Dependencies/configuration/data affected:** No dependency, backend, provider, or data changes. No sponsor system was enabled.
+- **Validation:** Pending final automated and browser checks.
+- **Risks and pending work:** Full-resolution PNGs increase transfer and texture memory. A reviewed optimized cleanup/downscale pass remains necessary before production. Character extractions are static; the existing v001 Scout sheet continues to animate movement.
+- **Commit status:** Source/revisions committed as `5116103` with `chore(SOF-007): preserve supplied art revisions`; final runtime selection is captured by SOF-013.
+
 ## SOF-006 — Publish incremental GitHub checkpoints
 
 - **Date/time:** 2026-09-05 PKT (UTC+05:00)

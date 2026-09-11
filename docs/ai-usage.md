@@ -2,6 +2,68 @@
 
 This document records material AI assistance for hackathon transparency. It does not imply that generated suggestions were accepted without human review.
 
+## SOF-015 — 2026-09-11
+
+- **Tools:** OpenAI Codex, the installed Convex design/expert guidance, a delegated Convex backend specialist, `convex-test`, TypeScript, Vitest, and local browser interaction.
+- **Purpose:** Implement the second reviewed priority: server-authoritative quest and community-fire truth with an honest client boundary.
+- **Changes assisted:** Fixed booth data/realtime query, hashed guest sessions, server-recorded quest hits and completion, session-derived World proof signals, action-scoped World binding, atomic/idempotent daily fuel limits, focused concurrency tests, persisted browser session adapter, protected minigame states, realtime fire rendering, validation, and documentation.
+- **Human decision:** Continue the reviewed priorities in order at a high quality bar. No commit or deployment permission was granted.
+- **Important external-state disclosure:** A Convex code-generation command unexpectedly reported uploading functions to the configured development deployment. No later Convex CLI or deployment command was run. The final SOF-015 public actions were not present during browser validation, so final deployment and server-success browser evidence remain pending.
+- **Limitations disclosed:** Correctly spaced quest-hit requests can still be automated by a modified client; World is the intended public-fuel human-eligibility boundary. No real Selfie Check, public fuel, multi-client browser run, ENS runtime identity, physical-device pass, or public deployment is claimed.
+
+## SOF-014 — 2026-09-11
+
+- **Tools:** OpenAI Codex, local browser interaction, Phaser, TypeScript, and Vitest.
+- **Purpose:** Implement the highest-priority complete first-player loop at production-minded quality.
+- **Changes assisted:** Ember onboarding, objective guidance, unique founder copy, typed quest progression, the Bug Squash scene, pointer/keyboard/DOM controls, success/failure/retry states, Practice Spark feedback, responsive/focus/reduced-motion polish, tests, and documentation.
+- **Human decision:** Build the previously reviewed priorities in order and favor high quality.
+- **Limitations disclosed:** The Practice Spark is local-only and is not verified fuel. World, server-authoritative fuel limits/realtime score, ENS runtime identity, physical-device testing, and public deployment remain pending.
+
+## SOF-013 — 2026-09-11
+
+- **Tools:** OpenAI Codex, built-in OpenAI image generation, exact local export tooling, and live browser inspection.
+- **Purpose:** Create the complete original runtime asset inventory without Kenney Tiny Farm or another third-party game pack.
+- **Image work:** 21 distinct generation calls covered terrain, three booths, Scout walking, four NPCs, six environmental props, Cold/Hot/Blazing fires, a shared pit, and two Bug Squash sheets. One terrain correction was retained but rejected because it baked a checkerboard and lost alpha.
+- **Code/documentation:** Codex created the reproducible exact-size exporter, manifest integration, Phaser terrain/character/fire/prop integration, updated tests, provenance, validation evidence, prompt archive, and change tracking.
+- **Human decision:** The builder explicitly requested image generation for all assets and prohibited Kenney Tiny Farm.
+- **Limitations:** Raw model outputs required mechanical cropping, nearest-neighbour downscaling, padding, and sheet assembly. The final exact PNGs passed structural and live-scene validation, but physical-device testing and frame-by-frame continuity capture remain pending.
+
+## SOF-012 — 2026-09-11
+
+- **Tools:** OpenAI Codex and local browser inspection.
+- **Purpose:** Remove the temporarily integrated Kenney Tiny Farm pack and restore the builder's original runtime artwork.
+- **Changes assisted:** Removal of source/runtime Kenney files, manifest and Phaser cleanup, regenerated runtime inventory, validation, and documentation.
+- **Human decision:** Use only the original supplied terrain, Scout, booths, founders, and fountain assets.
+
+## SOF-010 — 2026-09-11
+
+- **Tools:** OpenAI Codex and local browser inspection.
+- **Purpose:** Integrate the builder-supplied Kenney Tiny Farm asset pack as playable plaza artwork.
+- **Changes assisted:** Phaser spritesheet-spacing support, deterministic runtime copying, indexed-PNG/transparency validation, map composition, provenance, license attribution, and visual validation.
+- **Limitation:** Codex did not generate the Kenney asset pack; the existing game keeps its distinct booth and character assets until a later cohesive art pass.
+
+## SOF-009 — 2026-09-11
+
+- **Tools:** OpenAI Codex and local browser inspection.
+- **Purpose:** Diagnose and repair a plaza-ground composition regression after the supplied terrain integration.
+- **Changes assisted:** Kept the builder-supplied terrain active, added its missing typed path composition and a small landscape decoration pass, and made the page background blend with the 16:9 game canvas.
+- **Limitation:** Codex did not generate or alter any source/runtime art file in this task; the result remains an in-engine composition pass pending a later final art pass.
+
+## SOF-008 — 2026-09-10
+
+- **Tools:** OpenAI Codex and local browser inspection.
+- **Purpose:** Validate, preserve, and integrate builder-provided terrain tiles and eight-direction Scout idle poses; launch the local development server.
+- **Changes assisted:** Runtime copies/trimmed derivatives, manifest registration and hashes, Phaser ground composition/directional sprite selection, expanded world placement, validation, documentation, and local server verification.
+- **Limitation:** Codex did not generate the supplied art. It removed only supplied white export borders in derived runtime tiles and documented the remaining subtle source-tile tone join.
+
+## SOF-007 — 2026-09-05
+
+- **Tools:** OpenAI Codex and built-in OpenAI image generation.
+- **Purpose:** Convert the builder-supplied composite into separately addressable transparent game textures and integrate them without discarding the validated v001 fallback pack.
+- **Image work:** Eight background-extraction edit calls for three booths, fountain, Scout, and three founders. The full prompts are archived in `docs/prompts/SOF-007-integrate-supplied-assets.md`.
+- **Code/documentation:** Manifest registration, Phaser texture/display updates, HUD portrait, tests, provenance, validation, and change tracking.
+- **Limitations:** AI-extracted images remain large and are not represented as exact 16×16/16×32 production exports.
+
 ## SOF-006 — 2026-09-05
 
 - **Tool:** OpenAI Codex.

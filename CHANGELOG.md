@@ -2,6 +2,34 @@
 
 This records planning revisions. It is not evidence that the game, Git repository, sponsor integrations, or runtime assets are implemented. Repository task IDs start at SOF-001 during Git initialization; planning changes use DOC identifiers.
 
+## SOF-015 — September 11, 2026 — Authoritative quest and fire backend
+
+Added fixed realtime booth state, hashed guest sessions, server-recorded Bug Squash hits, server-derived quest completion, action-scoped World binding, and atomic/idempotent public-fuel limits. The client now persists its opaque guest session, uses the protected quest contract, renders realtime fire tiers, and exposes recoverable synchronization states. Provider-backed World completion, final backend deployment, and public fuel UI remain pending.
+
+## SOF-014 — September 11, 2026 — Guided first quest and Bug Squash
+
+Added Ember’s two-step first-run introduction, a clear first objective, distinct founder stories, and a complete Kindred Labs discovery quest. The new Bug Squash scene supports pointer, touch-sized DOM controls, and keyboard play; success earns an explicitly local Practice Spark that visibly grows Kindred’s fire without claiming public verified fuel.
+
+## SOF-013 — September 11, 2026 — Complete original runtime asset pack
+
+Generated, exported, registered, and visually integrated 21 original RGBA runtime PNGs: terrain, three booths, Scout walk sheet, four NPCs, six props, three fire tiers with shared pit, and Bug Squash sprites. The live plaza now uses this pack exclusively; no Kenney asset is present or loaded.
+
+## SOF-012 — September 11, 2026 — Original assets restored
+
+Removed the Kenney Tiny Farm source and runtime pack at the builder's request. The live plaza again uses only the builder-supplied grass terrain and Scout plus the existing booth, founder, and fountain artwork.
+
+## SOF-009 — September 11, 2026 — Tile plaza background restored
+
+Retained the builder-supplied 4×4 terrain field as the active ground and overlaid its intended crisp 16×16 paths. Expanded garden decoration and made letterboxed space blend with the landscape. No source or runtime art file was removed or replaced.
+
+## SOF-008 — September 10, 2026 — Supplied terrain and Scout integrated
+
+Registered the supplied 4×4 terrain field and eight-direction Scout idle set as runtime assets. The field now drives the larger plaza ground and the Scout changes pose by movement direction. Source images are retained, and runtime derivatives remove the supplied white export margins.
+
+## SOF-007 — September 5, 2026 — Supplied artwork integrated
+
+Extracted the three booths, fountain, Scout portrait, and three founders from the builder-supplied reference into separate transparent v002 assets. Registered the outputs alongside the deterministic fallback pack and switched the live plaza to the richer textures.
+
 ## SOF-006 — September 5, 2026 — GitHub checkpoints published
 
 Split the accumulated work into focused sponsor-feasibility, core-first, runtime-asset, playable-plaza, and documentation commits, then published `main` to the builder-supplied GitHub repository. Vercel and sponsor activation remain deferred.

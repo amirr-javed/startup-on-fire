@@ -6,7 +6,7 @@ Startup on Fire is an ETHOnline 2026 vertical slice: a cozy pixel city where pla
 
 ## Current status
 
-The core route now renders a playable greybox plaza with movement, camera follow, collision, three booth interactions, original runtime assets, and the existing Convex health connection. Source is published at `https://github.com/amirr-javed/startup-on-fire`; World and ENS remain disabled or offline, and Vercel deployment is deferred.
+The core route renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. A local SOF-015 backend now defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits; the browser adapter uses that contract when the matching Convex functions are deployed. World gameplay UI, ENS runtime identity, final Convex deployment, and Vercel remain pending.
 
 ## Requirements
 
@@ -22,7 +22,7 @@ pnpm convex:once
 pnpm dev
 ```
 
-`pnpm convex:once` opens the Convex login/configuration flow on first use and writes the real deployment values to the ignored `.env.local`. Do not copy the placeholder URL over that generated file and do not commit it.
+`pnpm convex:once` opens the Convex login/configuration flow on first use, writes the real deployment values to the ignored `.env.local`, and deploys local Convex functions. Treat it as an external deployment action. Do not copy the placeholder URL over that generated file and do not commit it.
 
 Open the URL printed by Vite. Without `VITE_CONVEX_URL`, the canvas still loads and the compact status panel reports that backend setup is pending.
 
@@ -33,7 +33,7 @@ Open the URL printed by Vite. Without `VITE_CONVEX_URL`, the canvas still loads 
 - Close the founder introduction with Escape or Continue.
 - Landscape touch devices receive a four-direction control pad with 44 px targets.
 
-The current core slice is a guest-accessible greybox plaza. World, ENS, public deployment, fuel, quests, and the minigame remain deferred.
+The current core slice is guest-accessible and includes one local quest. The Practice Spark is deliberately labelled as a local preview and does not change a public score. Server-authoritative fuel, World verification, ENS identity, and public deployment remain deferred.
 
 ## Runtime assets
 

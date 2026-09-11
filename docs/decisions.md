@@ -2,6 +2,18 @@
 
 Important product and engineering decisions are appended here with truthful dates. Planned behavior is distinguished from implemented behavior.
 
+## 2026-09-11 — SOF-015 — Separate protected gameplay from human eligibility
+
+Convex issues opaque guest credentials whose hashes are stored server-side. Bug Squash records rate-bounded, idempotent hit events and derives completion from those records plus server time; the client never submits a final score, tier, date key, or completion timestamp. Public fuel additionally requires a World proof whose signal is derived from the guest token hash, with its nullifier bound atomically to the same action-scoped session, one completed quest, one fuel per booth per UTC day, and at most three fuels per identity per UTC day. World remains the human-eligibility boundary because server-recorded browser events alone cannot prove a human performed them.
+
+## 2026-09-11 — SOF-014 — Keep pre-verification reward feedback honest
+
+The first quest awards a Practice Spark stored only in the in-memory quest session. It can preview a Cold-to-Hot fire transition but is explicitly described as local and cannot affect a public score. Public fuel remains reserved for a later server-authoritative Convex mutation gated by World verification. The minigame remains a separate Phaser scene, while accessible controls, progress, dialogue, and recovery states remain in the DOM layer.
+
+## 2026-09-11 — SOF-013 — Separate generated source art from validated runtime exports
+
+OpenAI outputs are retained as immutable high-resolution revisions. A reproducible local export step creates exact RGBA dimensions, frame grids, nearest-neighbour pixels, transparent padding, and stable bottom anchors before an asset enters the manifest. The live manifest now contains only the coherent SOF-013 pack; older original art is retained outside the load path for rollback.
+
 ## 2026-09-05 — SOF-006 — Publish incremental source checkpoints
 
 The builder authorized small focused commits and a push to the supplied public GitHub repository. Publish `main` while keeping Vercel, sponsor activation, and production deployment deferred. Local assistant skill/configuration files remain outside repository scope.

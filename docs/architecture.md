@@ -1,15 +1,17 @@
 # Startup on Fire — Architecture
 
-Status: core development through SOF-005. This describes the implemented shell/plaza and the boundaries later features must preserve.
+Status: core development through SOF-015. This describes the implemented plaza, protected quest/backend contract, and the boundaries later features must preserve.
 
 ## SOF-005 playable plaza
 
 - `PreloadScene` reads the runtime manifest and loads separately addressable PNGs before entering the plaza.
-- `PlazaScene` coordinates rendering, Arcade collision, camera follow, proximity, and animation. Static layout constants and terrain selection remain in a pure world module.
+- `PlazaScene` coordinates rendering, Arcade collision, camera follow, proximity, onboarding, founder interactions, and fire presentation. Static layout constants and terrain selection remain in a pure world module.
+- `BugSquashScene` owns timed canvas behavior, bug lifecycle, input, and visual feedback. Through a typed adapter it opens a protected attempt, records each accepted hit, and requests server-derived completion without importing Convex APIs.
+- `QuestSession` owns only in-memory onboarding and Practice Spark presentation across Phaser scene transitions. Convex owns protected quest completion and all public-fire eligibility.
 - `DigitalInput` unifies touch state without coupling DOM buttons to Phaser internals.
 - `GameUiBridge` publishes small typed proximity, dialogue, and discovery snapshots from Phaser to the DOM shell.
 - The world is 576×352 (36×22 16-pixel tiles) inside the 480×270 camera, making camera follow observable while remaining compact.
-- Sponsor adapters remain disabled and outside all scene, input, and UI paths.
+- World and ENS provider UI remain outside the scene layer. Realtime/quest access enters scenes only through the typed gameplay adapter.
 
 ## Runtime boundaries
 
@@ -21,7 +23,7 @@ Status: core development through SOF-005. This describes the implemented shell/p
 
 ## Implemented Phase 1 shell
 
-`src/main.ts` composes runtime configuration, the Phaser game, and the DOM status shell. `src/services/convex/client.ts` owns the browser WebSocket client and its cleanup. `convex/health.ts` supplies the foundation health query.
+`src/main.ts` composes runtime configuration, the Phaser game, and the DOM status shell. `src/services/convex/client.ts` owns the browser WebSocket client, persisted opaque guest credential, typed gameplay adapter, and cleanup. `convex/booths.ts`, `convex/gameActions.ts`, and internal stores own realtime state and protected mutations; scenes never call generated Convex APIs directly.
 
 The canvas renders at a 480×270 logical resolution using fit scaling, pixel-art filtering, and rounded pixels. This is a foundation preview, not the final plaza layout.
 
