@@ -15,9 +15,9 @@ if (uiRoot === null) {
 const input = new DigitalInput();
 const uiBridge = new GameUiBridge();
 const shell = createAppShell(uiRoot, input, uiBridge);
-const game = createGame("game-root", input, uiBridge);
 const runtimeConfig = readRuntimeConfig(import.meta.env);
 const backend = connectToBackend(runtimeConfig.convexUrl, shell.updateBackendStatus);
+const game = createGame("game-root", input, uiBridge, backend.gameplay);
 
 window.addEventListener(
   "beforeunload",

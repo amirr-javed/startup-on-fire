@@ -1,4 +1,5 @@
 export type Direction = "up" | "down" | "left" | "right";
+export type UiAction = "primary" | "secondary";
 
 export class DigitalInput {
   readonly #directions: Record<Direction, boolean> = {
@@ -10,6 +11,7 @@ export class DigitalInput {
 
   #interactRequested = false;
   #dismissRequested = false;
+  #uiAction: UiAction | null = null;
 
   public setDirection(direction: Direction, active: boolean): void {
     this.#directions[direction] = active;
@@ -39,11 +41,22 @@ export class DigitalInput {
     return requested;
   }
 
+  public requestUiAction(action: UiAction): void {
+    this.#uiAction = action;
+  }
+
+  public consumeUiAction(): UiAction | null {
+    const action = this.#uiAction;
+    this.#uiAction = null;
+    return action;
+  }
+
   public reset(): void {
     for (const direction of Object.keys(this.#directions) as Direction[]) {
       this.#directions[direction] = false;
     }
     this.#interactRequested = false;
     this.#dismissRequested = false;
+    this.#uiAction = null;
   }
 }

@@ -68,6 +68,7 @@ export function mountWorldSpike(root: HTMLElement, client: ConvexClient | null):
   root.append(panel);
 
   let abortController: AbortController | null = null;
+  let sessionToken: string | null = null;
 
   const render = (state: SpikeState, message: string) => {
     panel.dataset.state = state;
@@ -97,7 +98,8 @@ export function mountWorldSpike(root: HTMLElement, client: ConvexClient | null):
 
     clearRequest();
     render("preparing", "Requesting a signed challenge from Convex…");
-    const context = await client.action(api.worldActions.createRequestContext, {});
+    sessionToken ??= (await client.action(api.gameActions.createGuestSession, {})).sessionToken;
+    const context = await client.action(api.worldActions.createRequestContext, { sessionToken });
     if (!context.success) {
       render("error", context.message);
       return;
@@ -145,6 +147,7 @@ export function mountWorldSpike(root: HTMLElement, client: ConvexClient | null):
       render("verifying", "Verifying the proof server-side…");
       const result = await client.action(api.worldActions.verifyProof, {
         proof: completion.result as WorldSelfieProof,
+        sessionToken,
       });
       clearRequest();
       render(
