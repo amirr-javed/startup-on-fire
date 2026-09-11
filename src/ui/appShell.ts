@@ -47,10 +47,12 @@ type StoryElements = Readonly<{
   eyebrow: HTMLElement;
   title: HTMLElement;
   body: HTMLElement;
+  identity: HTMLElement;
   score: HTMLElement;
   progress: HTMLProgressElement;
   primary: HTMLButtonElement;
   secondary: HTMLButtonElement;
+  external: HTMLAnchorElement;
 }>;
 
 function renderGameState(
@@ -84,6 +86,13 @@ function renderGameState(
   story.body.textContent = overlay.body;
   story.eyebrow.textContent = overlay.kind === "minigame" ? "KINDRED QUEST" : overlay.eyebrow;
   const isMinigame = overlay.kind === "minigame";
+  const identityText = isMinigame ? undefined : overlay.identityText;
+  const externalUrl = isMinigame ? undefined : overlay.externalUrl;
+  story.identity.hidden = identityText === undefined;
+  story.identity.textContent = identityText ?? "";
+  story.external.hidden = externalUrl === undefined;
+  if (externalUrl === undefined) story.external.removeAttribute("href");
+  else story.external.href = externalUrl;
   story.score.hidden = !isMinigame;
   story.progress.hidden = !isMinigame;
   if (isMinigame) {
@@ -161,6 +170,8 @@ export function createAppShell(
   storyEyebrow.className = "story-card__eyebrow";
   const storyTitle = document.createElement("h2");
   const storyBody = document.createElement("p");
+  const storyIdentity = document.createElement("small");
+  storyIdentity.className = "story-card__identity";
   const storyScore = document.createElement("strong");
   storyScore.className = "story-card__score";
   const progress = document.createElement("progress");
@@ -175,8 +186,13 @@ export function createAppShell(
   primaryButton.className = "button button--primary";
   primaryButton.type = "button";
   primaryButton.addEventListener("click", () => input.requestUiAction("primary"));
-  actions.append(secondaryButton, primaryButton);
-  card.append(storyEyebrow, storyTitle, storyBody, storyScore, progress, actions);
+  const externalLink = document.createElement("a");
+  externalLink.className = "button button--secondary story-card__link";
+  externalLink.target = "_blank";
+  externalLink.rel = "noopener noreferrer";
+  externalLink.textContent = "Visit startup ↗";
+  actions.append(externalLink, secondaryButton, primaryButton);
+  card.append(storyEyebrow, storyTitle, storyBody, storyIdentity, storyScore, progress, actions);
 
   const controls = document.createElement("section");
   controls.className = "mobile-controls";
@@ -195,10 +211,12 @@ export function createAppShell(
     eyebrow: storyEyebrow,
     title: storyTitle,
     body: storyBody,
+    identity: storyIdentity,
     score: storyScore,
     progress,
     primary: primaryButton,
     secondary: secondaryButton,
+    external: externalLink,
   };
   const unsubscribe = uiBridge.subscribe((state) =>
     renderGameState(panel, prompt, discovery, objective, story, state),

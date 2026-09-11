@@ -8,12 +8,14 @@ import { PlazaScene } from "../scenes/PlazaScene";
 import { PreloadScene } from "../scenes/PreloadScene";
 import { GAME_BACKGROUND, GAME_HEIGHT, GAME_WIDTH, PIXEL_RENDER_SETTINGS } from "./display";
 import type { GameplayBackend } from "../../types/gameplay";
+import type { BoothDirectory } from "../../services/ens/boothDirectory";
 
 export function createGameConfig(
   parent: string,
   input: DigitalInput,
   uiBridge: GameUiBridge,
   gameplayBackend: GameplayBackend | null,
+  boothDirectory: BoothDirectory | null,
 ): Phaser.Types.Core.GameConfig {
   const questSession = new QuestSession();
   return {
@@ -38,7 +40,7 @@ export function createGameConfig(
     },
     scene: [
       new PreloadScene(),
-      new PlazaScene({ input, uiBridge, questSession, gameplayBackend }),
+      new PlazaScene({ input, uiBridge, questSession, gameplayBackend, boothDirectory }),
       new BugSquashScene({ input, uiBridge, questSession, gameplayBackend }),
     ],
   };

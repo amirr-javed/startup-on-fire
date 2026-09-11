@@ -69,4 +69,25 @@ describe("founder stories", () => {
     expect(signal[0]?.body).toContain("community feedback");
     expect(ember[0]?.body).toContain("creative tools");
   });
+
+  it("uses resolved ENS metadata while preserving the quest-specific next step", () => {
+    const pages = dialoguePagesFor({
+      id: "kindred-labs",
+      name: "Kindred Protocol",
+      founder: "Maya Chen",
+      ensName: "kindred.firecity.eth",
+      identityStatus: "resolved",
+      description: "Verified release intelligence for distributed teams.",
+      url: "https://kindred.example/",
+    });
+
+    expect(pages[0]).toMatchObject({
+      eyebrow: "MAYA CHEN // FOUNDER",
+      title: "Kindred Protocol",
+      body: "Verified release intelligence for distributed teams.",
+      identityText: "ENSv2 Sepolia · kindred.firecity.eth",
+      externalUrl: "https://kindred.example/",
+    });
+    expect(pages[1]?.primaryLabel).toBe("Start Bug Squash");
+  });
 });

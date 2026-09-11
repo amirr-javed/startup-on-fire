@@ -1,6 +1,6 @@
 # Startup on Fire — Architecture
 
-Status: core development through SOF-016. This describes the implemented plaza, protected quest/backend contract, earned public-fuel interface, and the boundaries later features must preserve.
+Status: core development through SOF-017. This describes the implemented plaza, protected quest/backend contract, earned public-fuel interface, read-only ENS identity, and the boundaries later features must preserve.
 
 ## SOF-005 playable plaza
 
@@ -11,7 +11,7 @@ Status: core development through SOF-016. This describes the implemented plaza, 
 - `DigitalInput` unifies touch state without coupling DOM buttons to Phaser internals.
 - `GameUiBridge` publishes small typed proximity, dialogue, and discovery snapshots from Phaser to the DOM shell.
 - The world is 576×352 (36×22 16-pixel tiles) inside the 480×270 camera, making camera follow observable while remaining compact.
-- World and ENS provider UI remain outside the scene layer. Realtime/quest access enters scenes only through the typed gameplay adapter.
+- World provider UI remains outside the scene layer. Realtime/quest access and sanitized ENS identity enter scenes only through typed adapters.
 
 ## Runtime boundaries
 
@@ -64,6 +64,19 @@ Phaser bootstrap                   DOM status update
 
 Missing or invalid public configuration leaves the game running and reports a setup state. Backend data is validated before it reaches the UI.
 
+## SOF-017 ENSv2 identity boundary
+
+`boothResolver.ts` lazily creates a Sepolia viem client and resolves normalized booth names without hardcoding a Universal Resolver or implementation resolver. `boothDirectory.ts` wraps the realtime Convex booth subscription, immediately emits its static data, then merges each independently resolved identity. Provider failures and missing records remain display states, not gameplay failures.
+
+```text
+Convex booth + ensName --> immediate static booth --> Phaser/dialogue
+              |                                  ^
+              +--> typed Sepolia resolver -------+
+                    bounded text / HTTPS / address
+```
+
+The resolver deduplicates in-flight reads, caches successful/missing results for five minutes and failures for 30 seconds, and discards stale subscription results. The optional `VITE_SEPOLIA_RPC_URL` selects public browser transport only; no secret or write authority belongs in browser configuration.
+
 ## Lifecycle rule
 
 Every subscription, listener, timer, tween, and external client must return or register a cleanup path. The current shell disconnects Convex and destroys Phaser during page unload.
@@ -82,4 +95,4 @@ development-only DOM -> Convex RP signature -> IDKit / World App
                        atomic nullifier consume
 ```
 
-The ENS experiment is a local TypeScript script, not browser or gameplay code. viem selects the Universal Resolver for reads. The Sepolia write script discovers the configured resolver immediately before the authorized write and again before the simulated unauthorized write; it never pins a Universal Resolver or implementation-resolver address.
+The ENS permission experiment remains a local TypeScript write script. Runtime gameplay performs read-only Sepolia enrichment through its typed resolver. Both paths rely on viem’s chain-aware resolution and never pin a Universal Resolver or implementation-resolver address; the write script still discovers the configured resolver immediately before each separately authorized permission test.

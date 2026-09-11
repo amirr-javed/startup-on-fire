@@ -1,9 +1,16 @@
+import type { EnsIdentityStatus } from "../../types/ens";
+
 export type BoothSummary = Readonly<{
   id: string;
   name: string;
   founder: string;
   fireScore?: number;
   fireTier?: "cold" | "hot" | "blazing";
+  ensName?: string;
+  identityStatus?: EnsIdentityStatus;
+  description?: string;
+  url?: string;
+  founderAddress?: string;
 }>;
 
 export type GameOverlay =
@@ -15,6 +22,8 @@ export type GameOverlay =
       body: string;
       primaryLabel: string;
       secondaryLabel?: string;
+      identityText?: string;
+      externalUrl?: string;
     }>
   | Readonly<{
       kind: "minigame";

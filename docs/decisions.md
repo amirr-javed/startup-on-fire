@@ -1,5 +1,13 @@
 # Startup on Fire — Decisions
 
+## 2026-09-12 — SOF-017 — ENS identity is optional read-only enrichment
+
+- Resolve normalized booth names on ENSv2 Sepolia through viem’s chain-aware client; never configure a resolver or implementation contract address.
+- Keep Convex/static booth copy as the immediate and permanent fallback. ENS latency, missing records, malformed names, and provider outages must not block guest exploration or founder quests.
+- Accept only bounded text, HTTPS links without credentials, and well-formed Ethereum addresses before identity data reaches Phaser or the DOM.
+- Cache stable reads for five minutes, short-cache failures for 30 seconds, deduplicate concurrent requests, and ignore results after a subscription becomes stale.
+- Treat `VITE_SEPOLIA_RPC_URL` as an optional public transport override. Ownership/write proof remains a separately authorized chain operation.
+
 Important product and engineering decisions are appended here with truthful dates. Planned behavior is distinguished from implemented behavior.
 
 ## 2026-09-12 — SOF-016 — Keep optional verification outside UI and startup cost

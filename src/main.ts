@@ -6,6 +6,8 @@ import { GameUiBridge } from "./game/events/GameUiBridge";
 import { DigitalInput } from "./game/input/DigitalInput";
 import { connectToBackend } from "./services/convex/client";
 import { createWorldSelfieVerifier } from "./services/world/selfieVerifier";
+import { createBoothDirectory } from "./services/ens/boothDirectory";
+import { createEnsBoothResolver } from "./services/ens/boothResolver";
 import { createAppShell } from "./ui/appShell";
 import { mountPublicFuelPanel } from "./ui/publicFuelPanel";
 
@@ -19,7 +21,14 @@ const uiBridge = new GameUiBridge();
 const shell = createAppShell(uiRoot, input, uiBridge);
 const runtimeConfig = readRuntimeConfig(import.meta.env);
 const backend = connectToBackend(runtimeConfig.convexUrl, shell.updateBackendStatus);
-const game = createGame("game-root", input, uiBridge, backend.gameplay);
+const boothDirectory =
+  backend.gameplay === null
+    ? null
+    : createBoothDirectory(
+        backend.gameplay,
+        createEnsBoothResolver({ rpcUrl: runtimeConfig.ensRpcUrl }),
+      );
+const game = createGame("game-root", input, uiBridge, backend.gameplay, boothDirectory);
 const unmountPublicFuelPanel =
   backend.client === null || backend.gameplay === null
     ? () => undefined

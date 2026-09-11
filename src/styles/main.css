@@ -369,6 +369,13 @@ body,
   margin: 0;
 }
 
+.story-card__identity {
+  color: var(--sof-tech-blue);
+  font-size: 10px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
 .story-card h2 {
   color: var(--sof-cream);
   font-size: 18px;
@@ -419,6 +426,8 @@ body,
 }
 
 .button {
+  display: inline-grid;
+  place-items: center;
   min-height: 44px;
   padding: 9px 14px;
   border: 1px solid var(--sof-ember);
@@ -427,6 +436,12 @@ body,
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.story-card__link {
+  margin-right: auto;
 }
 
 .button--primary {
@@ -555,8 +570,9 @@ body,
 @media (orientation: portrait) and (max-width: 700px) {
   #app::after {
     position: absolute;
+    top: 108px;
     right: 12px;
-    bottom: 12px;
+    bottom: auto;
     z-index: 2;
     max-width: 190px;
     padding: 7px 9px;
@@ -609,6 +625,19 @@ body,
   .story-card[data-kind="minigame"] > * {
     grid-column: 1;
     grid-row: auto;
+  }
+
+  .story-card__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .story-card__link {
+    margin-right: 0;
+  }
+
+  .story-card__actions .button--primary {
+    grid-column: 1 / -1;
   }
 
   .public-fuel-card {

@@ -1,6 +1,6 @@
 # Phase 1 Sponsor Feasibility Evidence
 
-Status: World gameplay UI is integrated through SOF-016, but provider activation and account-backed acceptance remain pending. World server actions still require the deliberately configured `WORLD_SPIKE_ENABLED=true` gate, and ENS remains offline tooling. No real provider success is represented as complete.
+Status: World gameplay UI is integrated through SOF-016 and read-only ENSv2 booth enrichment through SOF-017. Provider activation, actual placeholder ENS records, and account-backed acceptance/write evidence remain pending. No real provider success is represented as complete.
 
 ## World Selfie Check
 
@@ -23,6 +23,9 @@ Official IDKit guidance distinguishes the `staging` simulator from real Sandbox/
 ## ENSv2
 
 - **Dependency:** viem 2.56.3, above the documented ENSv2-ready minimum of 2.35.0.
+- **Runtime read path:** the normal game now resolves normalized booth names on Sepolia through a typed adapter and viem-selected ENS infrastructure. Static founder stories render immediately and remain available through loading, missing, invalid, or unavailable states.
+- **Runtime record policy:** optional `com.startuponfire.name`, `com.startuponfire.founder`, `description`, `url`, and ETH address records are read. Text is bounded, URLs must be HTTPS without credentials, and malformed optional records are discarded before display.
+- **Automated evidence:** resolver normalization, record validation, missing/provider states, concurrent deduplication/cache, late-result cleanup, directory merge behavior, dynamic dialogue, and safe DOM link behavior are covered. The `*.firecity.eth` booth names remain unregistered/unverified placeholders and are not claimed resolved.
 - **Universal Resolver readiness:** passed on Ethereum mainnet on 2026-09-05 through viem’s library-selected resolver. `ur.integration-tests.eth` resolved to `0x2222222222222222222222222222222222222222`.
 - **CCIP-Read readiness:** passed on Ethereum mainnet on 2026-09-05. `test.offchaindemo.eth` resolved to `0x779981590E7Ccc0CFAe8040Ce7151324747cDb97`.
 - **Important failed attempt:** viem’s first default public RPC returned HTTP 503 during the CCIP-Read call. Re-running with `https://ethereum-rpc.publicnode.com` passed both checks. The script now falls back to that endpoint when no explicit `MAINNET_RPC_URL` is configured.
@@ -35,6 +38,6 @@ Official IDKit guidance distinguishes the `staging` simulator from real Sandbox/
 
 1. Install World identifiers and the RP signing key directly in Convex; complete one real Sandbox Selfie Check.
 2. Retry the same stable action/proof path or reject/cancel a second attempt and record the sanitized result.
-3. Configure a disposable ENSv2 Sepolia name/key locally; record the authorized transaction hash, resolved value, and unauthorized revert.
+3. Configure a disposable ENSv2 Sepolia name/key locally; record the authorized transaction hash, runtime-resolved value, and unauthorized revert.
 
 No private key, signing key, raw proof, selfie, or persistent biometric payload belongs in this document.

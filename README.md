@@ -6,7 +6,7 @@ Startup on Fire is an ETHOnline 2026 vertical slice: a cozy pixel city where pla
 
 ## Current status
 
-The core route renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. The SOF-015 backend defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits. After an earned Practice Spark, the SOF-016 browser flow can optionally request World Selfie Check and send public fuel through that contract. Real World acceptance, ENS runtime identity, final Convex deployment, and Vercel remain pending.
+The core route renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. The SOF-015 backend defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits. After an earned Practice Spark, the SOF-016 browser flow can optionally request World Selfie Check and send public fuel through that contract. SOF-017 adds read-only ENSv2 Sepolia identity enrichment with immediate static fallback. Real World acceptance, actual ENS booth records, final Convex deployment, and Vercel remain pending.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ pnpm dev
 
 `pnpm convex:once` opens the Convex login/configuration flow on first use, writes the real deployment values to the ignored `.env.local`, and deploys local Convex functions. Treat it as an external deployment action. Do not copy the placeholder URL over that generated file and do not commit it.
 
-Open the URL printed by Vite. Without `VITE_CONVEX_URL`, the canvas still loads and the compact status panel reports that backend setup is pending.
+Open the URL printed by Vite. Without `VITE_CONVEX_URL`, the canvas still loads and the compact status panel reports that backend setup is pending. `VITE_SEPOLIA_RPC_URL` is an optional public browser RPC override for ENS reads; omit it to use viem's default Sepolia transport.
 
 ## Plaza controls
 
@@ -60,7 +60,7 @@ pnpm convex:once
 
 Enter the signing key only at the Convex prompt. Never put it in `.env.local`, browser configuration, logs, or Git. A real Sandbox app uses `production`; use `staging` only with World’s simulator. The browser lazy-loads `selfieCheckLegacy` only after the player starts verification. Convex signs a short-lived, session-bound challenge, validates the proof server-side, and persists only the pseudonymous action/nullifier/session binding needed to reject replay and enforce daily fuel limits. It never stores a selfie or raw proof.
 
-The ENS scripts are offline developer tools and are not loaded by the game. They are also deferred. When sponsor work resumes, the read-only checks can be run with:
+The game now performs read-only ENSv2 Sepolia enrichment for booth names supplied by Convex. It normalizes names, validates bounded records, shows explicit loading/missing/unavailable states, and keeps static founder stories as the fallback. The current `*.firecity.eth` values are placeholders, not evidence of registered or resolved names. The separate mainnet readiness and Sepolia write scripts remain developer tools; run the read-only readiness check with:
 
 ```bash
 pnpm spike:ens:read

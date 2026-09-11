@@ -5,6 +5,7 @@ import type { DigitalInput } from "../input/DigitalInput";
 import type { QuestSession } from "../quests/QuestSession";
 import { dialoguePagesFor } from "../quests/questContent";
 import type { GameplayBackend, RealtimeBooth } from "../../types/gameplay";
+import type { BoothDirectory } from "../../services/ens/boothDirectory";
 import {
   BOOTHS,
   CITY_CENTER,
@@ -28,6 +29,7 @@ type PlazaServices = Readonly<{
   uiBridge: GameUiBridge;
   questSession: QuestSession;
   gameplayBackend: GameplayBackend | null;
+  boothDirectory: BoothDirectory | null;
 }>;
 
 type KeyMap = Record<
@@ -44,6 +46,7 @@ export class PlazaScene extends Phaser.Scene {
   readonly #uiBridge: GameUiBridge;
   readonly #questSession: QuestSession;
   readonly #gameplayBackend: GameplayBackend | null;
+  readonly #boothDirectory: BoothDirectory | null;
   readonly #fireSprites = new Map<string, Phaser.GameObjects.Sprite>();
   readonly #boothStates = new Map<string, RealtimeBooth>();
   #unsubscribeBooths: (() => void) | null = null;
@@ -63,6 +66,7 @@ export class PlazaScene extends Phaser.Scene {
     this.#uiBridge = services.uiBridge;
     this.#questSession = services.questSession;
     this.#gameplayBackend = services.gameplayBackend;
+    this.#boothDirectory = services.boothDirectory;
   }
 
   public create(): void {
@@ -174,8 +178,8 @@ export class PlazaScene extends Phaser.Scene {
       this.#input.reset();
       this.#uiBridge.publish(this.#state());
     });
-    if (this.#gameplayBackend !== null) {
-      this.#unsubscribeBooths = this.#gameplayBackend.subscribeBooths(
+    if (this.#boothDirectory !== null) {
+      this.#unsubscribeBooths = this.#boothDirectory.subscribe(
         (booths) => this.#applyRealtimeBooths(booths),
         () => undefined,
       );
@@ -239,7 +243,7 @@ export class PlazaScene extends Phaser.Scene {
       return true;
     }
     if (this.#openBooth === null) return false;
-    const pages = dialoguePagesFor(this.#openBooth);
+    const pages = dialoguePagesFor(this.#boothSummary(this.#openBooth)!);
     const isLastPage = this.#dialoguePage >= pages.length - 1;
     if (!isLastPage) {
       this.#dialoguePage += 1;
@@ -298,10 +302,15 @@ export class PlazaScene extends Phaser.Scene {
     const realtime = this.#boothStates.get(booth.id);
     return {
       id: booth.id,
-      name: booth.name,
-      founder: booth.founder,
+      name: realtime?.name ?? booth.name,
+      founder: realtime?.founder ?? booth.founder,
       fireScore: realtime?.fireScore,
       fireTier: realtime?.fireTier,
+      ensName: realtime?.ensName,
+      identityStatus: realtime?.identityStatus,
+      description: realtime?.description,
+      url: realtime?.url,
+      founderAddress: realtime?.founderAddress,
     };
   }
 
@@ -443,15 +452,19 @@ export class PlazaScene extends Phaser.Scene {
     }
     if (this.#openBooth !== null) {
       if (this.#openBooth.id === "kindred-labs" && this.#questSession.kindredQuest === "sparked") {
+        const booth = this.#boothSummary(this.#openBooth)!;
+        const identity = dialoguePagesFor(booth)[0]!;
         return {
           kind: "dialogue",
-          eyebrow: "MAYA // FOUNDER",
-          title: "Kindred Labs",
+          eyebrow: `${booth.founder.toUpperCase()} // FOUNDER`,
+          title: booth.name,
           body: "You cleared our release board—and the fire remembers. Thanks, Scout. Explore the other booths to discover what they’re building.",
           primaryLabel: "Keep exploring",
+          identityText: identity.identityText,
+          externalUrl: identity.externalUrl,
         };
       }
-      const page = dialoguePagesFor(this.#openBooth)[this.#dialoguePage]!;
+      const page = dialoguePagesFor(this.#boothSummary(this.#openBooth)!)[this.#dialoguePage]!;
       return { kind: "dialogue", ...page, secondaryLabel: "Maybe later" };
     }
     return { kind: "none" };
@@ -472,7 +485,10 @@ export class PlazaScene extends Phaser.Scene {
       overlay: this.#overlay(),
       publicFuelOffer:
         this.#questSession.kindredQuest === "sparked" && this.#nearby?.id === "kindred-labs"
-          ? { boothSlug: "kindred-labs", boothName: "Kindred Labs" }
+          ? {
+              boothSlug: "kindred-labs",
+              boothName: this.#boothSummary(this.#nearby)?.name ?? "Kindred Labs",
+            }
           : null,
     };
   }

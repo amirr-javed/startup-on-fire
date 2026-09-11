@@ -1,5 +1,13 @@
 # Startup on Fire — AI Usage
 
+## SOF-017 — 2026-09-12
+
+- **Tools:** OpenAI Codex, official ENS developer documentation, official viem documentation, local automated tests, and production build tooling.
+- **Purpose:** Add player-visible read-only ENSv2 booth identity while preserving a reliable guest experience.
+- **Changes assisted:** Typed ENS resolver/directory adapters, input validation, cache and stale-result lifecycle behavior, Phaser-to-DOM identity flow, safe external link rendering, focused tests, configuration, and documentation.
+- **Human decision:** Continue the reviewed P0 priorities with high quality and commit every focused change.
+- **Limitations disclosed:** Codex did not register a name, write a record, use a private key, deploy the app/backend, or prove that the placeholder `firecity.eth` names resolve. Runtime identity falls back honestly until those account-backed steps are completed.
+
 This document records material AI assistance for hackathon transparency. It does not imply that generated suggestions were accepted without human review.
 
 ## SOF-016 — 2026-09-12

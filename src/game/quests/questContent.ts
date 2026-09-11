@@ -5,6 +5,8 @@ export type DialoguePage = Readonly<{
   title: string;
   body: string;
   primaryLabel: string;
+  identityText?: string;
+  externalUrl?: string;
 }>;
 
 const KINDRED_PAGES: readonly DialoguePage[] = [
@@ -38,16 +40,49 @@ const BOOTH_INTROS: Readonly<Record<string, DialoguePage>> = {
 };
 
 export function dialoguePagesFor(booth: BoothSummary): readonly DialoguePage[] {
-  if (booth.id === "kindred-labs") return KINDRED_PAGES;
+  const identity = identityDetails(booth);
+  if (booth.id === "kindred-labs") {
+    return [
+      {
+        ...KINDRED_PAGES[0]!,
+        eyebrow: `${booth.founder.toUpperCase()} // FOUNDER`,
+        title: booth.name,
+        body: booth.description ?? KINDRED_PAGES[0]!.body,
+        ...identity,
+      },
+      KINDRED_PAGES[1]!,
+    ];
+  }
   const intro = BOOTH_INTROS[booth.id];
-  return intro === undefined
-    ? [
-        {
-          eyebrow: `${booth.founder.toUpperCase()} // FOUNDER`,
-          title: booth.name,
-          body: "This founder is preparing a new discovery quest.",
-          primaryLabel: "Back to the plaza",
-        },
-      ]
-    : [intro];
+  return [
+    {
+      ...(intro ?? {
+        eyebrow: `${booth.founder.toUpperCase()} // FOUNDER`,
+        title: booth.name,
+        body: "This founder is preparing a new discovery quest.",
+        primaryLabel: "Back to the plaza",
+      }),
+      eyebrow: `${booth.founder.toUpperCase()} // FOUNDER`,
+      title: booth.name,
+      body: booth.description ?? intro?.body ?? "This founder is preparing a new discovery quest.",
+      ...identity,
+    },
+  ];
+}
+
+function identityDetails(booth: BoothSummary): Pick<DialoguePage, "identityText" | "externalUrl"> {
+  if (booth.ensName === undefined) return {};
+  const identityText =
+    booth.identityStatus === "loading"
+      ? `ENSv2 Sepolia · resolving ${booth.ensName}…`
+      : booth.identityStatus === "resolved"
+        ? `ENSv2 Sepolia · ${booth.ensName}`
+        : booth.identityStatus === "missing"
+          ? `ENSv2 records pending · ${booth.ensName}`
+          : booth.identityStatus === "unavailable"
+            ? `ENS temporarily unavailable · ${booth.ensName}`
+            : booth.identityStatus === "invalid"
+              ? "ENS identity unavailable"
+              : `ENSv2 Sepolia · ${booth.ensName}`;
+  return { identityText, externalUrl: booth.url };
 }

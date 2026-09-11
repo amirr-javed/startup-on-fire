@@ -1,3 +1,5 @@
+import type { EnsIdentityStatus } from "./ens";
+
 export type BoothSlug = "kindred-labs" | "signal-garden" | "ember-studio";
 export type FireTier = "cold" | "hot" | "blazing";
 
@@ -9,6 +11,10 @@ export type RealtimeBooth = Readonly<{
   active: boolean;
   fireScore: number;
   fireTier: FireTier;
+  identityStatus?: EnsIdentityStatus;
+  description?: string;
+  url?: string;
+  founderAddress?: string;
 }>;
 
 export type QuestStartResult =
