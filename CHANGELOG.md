@@ -2,6 +2,10 @@
 
 This records planning revisions. It is not evidence that the game, Git repository, sponsor integrations, or runtime assets are implemented. Repository task IDs start at SOF-001 during Git initialization; planning changes use DOC identifiers.
 
+## SOF-016 — September 12, 2026 — Earned public-fuel interface
+
+Mounted the optional World Selfie Check flow after the Kindred Labs Practice Spark, behind a typed provider adapter. The compact panel preserves guest play, keeps one idempotency key across safe retries, supports cancellation and keyboard dismissal, lazy-loads World/QR code, and converts a spark into public fuel only after server verification. Five DOM interaction tests and desktop/mobile visual checks pass; real World completion and final Convex deployment remain pending.
+
 ## SOF-015 — September 11, 2026 — Authoritative quest and fire backend
 
 Added fixed realtime booth state, hashed guest sessions, server-recorded Bug Squash hits, server-derived quest completion, action-scoped World binding, and atomic/idempotent public-fuel limits. The client now persists its opaque guest session, uses the protected quest contract, renders realtime fire tiers, and exposes recoverable synchronization states. Provider-backed World completion, final backend deployment, and public fuel UI remain pending.

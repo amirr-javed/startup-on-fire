@@ -6,7 +6,7 @@ Startup on Fire is an ETHOnline 2026 vertical slice: a cozy pixel city where pla
 
 ## Current status
 
-The core route renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. A local SOF-015 backend now defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits; the browser adapter uses that contract when the matching Convex functions are deployed. World gameplay UI, ENS runtime identity, final Convex deployment, and Vercel remain pending.
+The core route renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. The SOF-015 backend defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits. After an earned Practice Spark, the SOF-016 browser flow can optionally request World Selfie Check and send public fuel through that contract. Real World acceptance, ENS runtime identity, final Convex deployment, and Vercel remain pending.
 
 ## Requirements
 
@@ -33,7 +33,7 @@ Open the URL printed by Vite. Without `VITE_CONVEX_URL`, the canvas still loads 
 - Close the founder introduction with Escape or Continue.
 - Landscape touch devices receive a four-direction control pad with 44 px targets.
 
-The current core slice is guest-accessible and includes one local quest. The Practice Spark is deliberately labelled as a local preview and does not change a public score. Server-authoritative fuel, World verification, ENS identity, and public deployment remain deferred.
+The current core slice is guest-accessible and includes one protected quest when the matching Convex actions are deployed. The Practice Spark is deliberately labelled as a local preview and does not change a public score. Near Kindred Labs, the optional **Verify & fuel** panel can run World Selfie Check; only the subsequent server-accepted mutation changes public fire. A wallet and purchase are never required.
 
 ## Runtime assets
 
@@ -44,9 +44,9 @@ pnpm assets:validate
 
 The generator produces the versioned Phase 2 pixel batch and `public/assets/manifest.json`. See `docs/assets.md` and `docs/asset-validation.md` for provenance and validation status.
 
-## Deferred sponsor feasibility spikes
+## World Selfie Check configuration
 
-The World browser screen and server actions are disabled while the core product is built. Re-enabling them later requires an explicit code decision plus `WORLD_SPIKE_ENABLED=true`; do not enable the flag during core development. The retained configuration procedure is:
+The gameplay panel is mounted on the normal route but appears only after the player earns and throws the Kindred Labs Practice Spark while near that booth. Provider actions remain disabled until the retained server activation gate is deliberately configured. The configuration procedure is:
 
 ```bash
 pnpm convex env set WORLD_APP_ID app_your_app_id
@@ -58,7 +58,7 @@ pnpm convex env set WORLD_SPIKE_ENABLED true
 pnpm convex:once
 ```
 
-Enter the signing key only at the Convex prompt. Never put it in `.env.local`, browser configuration, logs, or Git. A real Sandbox app uses `production`; use `staging` only with World’s simulator. The spike requests `selfieCheckLegacy`, verifies the returned payload server-side, and persists only the stable action/nullifier pair needed to reject replay.
+Enter the signing key only at the Convex prompt. Never put it in `.env.local`, browser configuration, logs, or Git. A real Sandbox app uses `production`; use `staging` only with World’s simulator. The browser lazy-loads `selfieCheckLegacy` only after the player starts verification. Convex signs a short-lived, session-bound challenge, validates the proof server-side, and persists only the pseudonymous action/nullifier/session binding needed to reject replay and enforce daily fuel limits. It never stores a selfie or raw proof.
 
 The ENS scripts are offline developer tools and are not loaded by the game. They are also deferred. When sponsor work resumes, the read-only checks can be run with:
 

@@ -52,6 +52,7 @@ describe("World verifier handling", () => {
 
   it("recognizes small typed public results", () => {
     expect(isWorldRequestContextResult({ success: false, code: "not_configured" })).toBe(true);
+    expect(isWorldRequestContextResult({ success: false, code: "invalid_session" })).toBe(true);
     expect(isWorldVerificationResult({ success: true, replay: false })).toBe(true);
     expect(isWorldVerificationResult({ code: "provider_rejected" })).toBe(false);
   });

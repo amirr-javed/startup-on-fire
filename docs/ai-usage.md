@@ -2,6 +2,15 @@
 
 This document records material AI assistance for hackathon transparency. It does not imply that generated suggestions were accepted without human review.
 
+## SOF-016 — 2026-09-12
+
+- **Tools:** OpenAI Codex, frontend interaction/craft guidance, TypeScript, Vitest, jsdom, and local browser inspection.
+- **Purpose:** Implement the next P0 priority: an honest, optional player-facing World verification and public-fuel flow.
+- **Changes assisted:** Separated provider behavior into a typed World adapter, mounted the earned-fuel panel on the normal route, preserved one idempotency key across retries, added cancellation/focus/live-region states, lazy-loaded IDKit and QR generation, aligned World result types, added five DOM interaction tests, and updated integration documentation.
+- **Human decision:** Continue prioritized work at a high quality bar and commit/track small changes. No Convex deployment or provider credential installation was authorized in this task.
+- **Validation:** Lint, strict typecheck, 49 tests, production build, and isolated responsive browser checks passed. A real game walkthrough stopped safely at the quest synchronization error because the final backend actions are not deployed.
+- **Limitations disclosed:** No real Selfie Check, provider replay, accepted public fuel, multi-client fire update, Convex deployment, physical-device test, or production deployment is claimed.
+
 ## SOF-015 — 2026-09-11
 
 - **Tools:** OpenAI Codex, the installed Convex design/expert guidance, a delegated Convex backend specialist, `convex-test`, TypeScript, Vitest, and local browser interaction.

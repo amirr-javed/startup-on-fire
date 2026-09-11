@@ -1,18 +1,18 @@
 # Phase 1 Sponsor Feasibility Evidence
 
-Status: deferred under the core-first sequencing decision. Feasibility code is retained, but the World browser entry point is removed, World server actions require the unset `WORLD_SPIKE_ENABLED=true` flag, and ENS remains offline tooling. Account-backed acceptance tests remain pending and are not represented as successful.
+Status: World gameplay UI is integrated through SOF-016, but provider activation and account-backed acceptance remain pending. World server actions still require the deliberately configured `WORLD_SPIKE_ENABLED=true` gate, and ENS remains offline tooling. No real provider success is represented as complete.
 
 ## World Selfie Check
 
 - **Dependency:** `@worldcoin/idkit-core` 4.2.4, using `IDKit.requestWithInviteCode` and `selfieCheckLegacy` with `allow_legacy_proofs: true`.
-- **Isolation:** development-only `?spike=world` DOM screen; no default-route or Phaser integration.
+- **Isolation:** the provider adapter and earned-fuel DOM panel are on the default route but remain outside Phaser. The panel appears only after an earned Practice Spark and booth proximity; IDKit/WASM load only after explicit verification intent. The older development screen remains retained but unmounted.
 - **Server boundary:** Convex generates RP context signatures and forwards the unchanged IDKit payload to `POST https://developer.world.org/api/v4/verify/{rp_id}`. The RP signing key is never returned to the browser.
-- **Stable scope:** configured action plus stable signal `startup-on-fire-phase-1-selfie-check`.
-- **Persistence:** only the action and canonical decimal nullifier are stored. Proofs, selfies, integrity bundles, signing keys, and verifier bodies are not logged or persisted.
+- **Stable scope:** configured action plus a namespace-separated signal derived server-side from the hashed guest-session token.
+- **Persistence:** only the action, canonical decimal nullifier, and guest-session binding are stored. Proofs, selfies, integrity bundles, signing keys, and verifier bodies are not logged or persisted.
 - **Assurance statement:** Selfie Check is medium-assurance liveness/abuse resistance. It is not strict proof that one person controls only one account. A stable per-action nullifier limits replay for the same World credential, while residual multi-account risk remains.
-- **Automated evidence:** World configuration parsing, missing configuration, verifier-response reduction, 256-bit nullifier canonicalization, and public-result guards are covered by unit tests.
+- **Automated evidence:** World configuration parsing, missing configuration, verifier-response reduction, 256-bit nullifier canonicalization, session binding, backend fuel rules, and five public-panel interaction/recovery paths are covered by unit tests.
 - **Convex evidence:** functions deployed successfully to `amir-javed:startup-on-fire` development deployment `acoustic-sockeye-371` in Europe (Ireland) on 2026-09-05. The health query returned `ok`. Calling `worldActions:createRequestContext` without provider variables returned the compact `not_configured` result rather than throwing or exposing values.
-- **Browser evidence:** the isolated screen reached the realtime backend and rendered the missing-provider setup state without console errors. The normal route contained no World UI.
+- **Browser evidence:** the earned-fuel panel rendered readable idle and missing-configuration states at 1280 px desktop, 768×432 landscape, and 375×667 portrait through a temporary local harness that was removed after inspection. The real game route reached its safe quest-sync error because the final SOF-015 actions are not deployed; no provider-success claim is made.
 - **Sandbox success attempt:** pending World Developer Portal identifiers, an RP signing key installed directly in Convex, and human completion in World.
 - **Duplicate/rejection attempt:** pending the same prerequisites. The atomic storage path is implemented but has not been represented as provider-tested.
 

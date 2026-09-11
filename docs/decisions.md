@@ -2,6 +2,10 @@
 
 Important product and engineering decisions are appended here with truthful dates. Planned behavior is distinguished from implemented behavior.
 
+## 2026-09-12 — SOF-016 — Keep optional verification outside UI and startup cost
+
+The public-fuel card receives a typed `WorldSelfieVerifier`; it does not import IDKit or call generated Convex functions. The adapter reduces provider/server outcomes to a small public union and dynamically imports IDKit only after explicit player intent. The panel retains one idempotency key through eligibility preflight, verification, final fuel, and safe retry. Public fire still changes only through the atomic backend mutation and realtime subscription.
+
 ## 2026-09-11 — SOF-015 — Separate protected gameplay from human eligibility
 
 Convex issues opaque guest credentials whose hashes are stored server-side. Bug Squash records rate-bounded, idempotent hit events and derives completion from those records plus server time; the client never submits a final score, tier, date key, or completion timestamp. Public fuel additionally requires a World proof whose signal is derived from the guest token hash, with its nullifier bound atomically to the same action-scoped session, one completed quest, one fuel per booth per UTC day, and at most three fuels per identity per UTC day. World remains the human-eligibility boundary because server-recorded browser events alone cannot prove a human performed them.

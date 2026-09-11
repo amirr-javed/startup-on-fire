@@ -21,7 +21,7 @@ export type WorldRequestContextResult =
     }
   | {
       success: false;
-      code: "not_configured" | "invalid_configuration" | "signing_failed";
+      code: "not_configured" | "invalid_configuration" | "signing_failed" | "invalid_session";
       message: string;
     };
 
@@ -34,7 +34,9 @@ export type WorldVerificationResult =
         | "provider_rejected"
         | "provider_unavailable"
         | "replay_detected"
-        | "not_configured";
+        | "not_configured"
+        | "invalid_configuration"
+        | "invalid_session";
       message: string;
     };
 

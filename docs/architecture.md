@@ -1,6 +1,6 @@
 # Startup on Fire — Architecture
 
-Status: core development through SOF-015. This describes the implemented plaza, protected quest/backend contract, and the boundaries later features must preserve.
+Status: core development through SOF-016. This describes the implemented plaza, protected quest/backend contract, earned public-fuel interface, and the boundaries later features must preserve.
 
 ## SOF-005 playable plaza
 
@@ -27,6 +27,29 @@ Status: core development through SOF-015. This describes the implemented plaza, 
 
 The canvas renders at a 480×270 logical resolution using fit scaling, pixel-art filtering, and rounded pixels. This is a foundation preview, not the final plaza layout.
 
+## SOF-016 earned public-fuel boundary
+
+`publicFuelPanel.ts` owns the compact disclosure, status, QR/link handoff, cancellation, retry, and accepted-fuel feedback. It receives only the typed gameplay and `WorldSelfieVerifier` interfaces; it does not import IDKit, generated Convex functions, or provider proof types. `selfieVerifier.ts` owns the provider request, proof polling, session-bound server verification, and sanitized failure reduction. IDKit and its WASM are dynamically imported only after the player explicitly starts verification, so guest exploration does not pay the sponsor SDK download cost.
+
+```text
+Practice Spark + booth proximity
+              |
+              v
+      optional DOM panel -- preflight fuel --> already verified? --> atomic fuel
+              |                                      |
+              +--> typed World verifier              +--> realtime booth query
+                        |
+          session-bound signed challenge
+                        |
+              World App / IDKit proof
+                        |
+               Convex server verify
+                        |
+                 atomic public fuel
+```
+
+The first fuel call is an idempotent server preflight using the same key retained through every safe retry. An already verified session can complete immediately; an unverified session enters World. Cancellation cannot create local success, and the panel never updates the fire itself—the realtime booth subscription remains authoritative.
+
 ## Data flow
 
 ```text
@@ -45,9 +68,9 @@ Missing or invalid public configuration leaves the game running and reports a se
 
 Every subscription, listener, timer, tween, and external client must return or register a cleanup path. The current shell disconnects Convex and destroys Phaser during page unload.
 
-## Sponsor spike boundaries
+## Sponsor and gameplay World boundaries
 
-The World UI is dynamically imported only when `?spike=world` is present. It does not enter Phaser, the default app path, or permanent player UI. The browser requests an RP context from `convex/worldActions.ts`; the signing key never leaves Convex. IDKit returns a legacy Selfie Check payload to memory, which the browser passes to a Convex action. That action enforces the configured action, environment, stable signal hash, single selfie response, and nullifier shape before forwarding the payload to World’s verifier. Only a canonical decimal action/nullifier pair is stored, through one atomic Convex mutation.
+The retained development spike is no longer the only World surface. The normal route now composes the earned-fuel panel, while provider code remains outside Phaser and appears only after quest completion plus booth proximity. The browser requests an RP context from `convex/worldActions.ts`; the signing key never leaves Convex. IDKit returns a legacy Selfie Check payload to memory, which the browser passes to a Convex action. That action enforces the configured action, environment, session-derived signal hash, single selfie response, and nullifier shape before forwarding the payload to World’s verifier. Only a canonical decimal action/nullifier plus its guest-session binding is stored, through one atomic Convex mutation.
 
 ```text
 development-only DOM -> Convex RP signature -> IDKit / World App

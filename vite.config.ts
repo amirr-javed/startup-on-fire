@@ -7,5 +7,7 @@ export default defineConfig({
   test: {
     environment: "node",
     include: ["tests/**/*.test.ts", "convex/**/*.test.ts"],
+    pool: "threads",
+    testTimeout: 15_000,
   },
 });
