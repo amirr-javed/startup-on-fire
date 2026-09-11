@@ -1,5 +1,13 @@
 # Startup on Fire — AI Usage
 
+## SOF-018 — 2026-09-12
+
+- **Tools:** OpenAI Codex, the frontend quality/craft guidelines, local Vitest/TypeScript/ESLint/build tooling, and controlled Windows browser inspection.
+- **Purpose:** Complete the missing P0 landing/loading experience at production-minded visual and accessibility quality.
+- **Changes assisted:** Immediate pre-script fallback markup/styles, actual Phaser loader progress, terminal state control, defensive manifest validation, a branded guest entry screen, inert/focus lifecycle, retry UI, responsive CSS, automated tests, development/production visual checks, and project tracking.
+- **Human decision:** Continue implementing the agreed P0 priorities with high quality and focused commits.
+- **Limitations disclosed:** Browser testing used local Vite and emulated viewports, not a physical touch device or deployed production URL. No provider, deployment, chain, or secret action was performed.
+
 ## SOF-017 — 2026-09-12
 
 - **Tools:** OpenAI Codex, official ENS developer documentation, official viem documentation, local automated tests, and production build tooling.

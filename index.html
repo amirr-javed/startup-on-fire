@@ -5,9 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Startup on Fire — discover startups in a cozy pixel city." />
     <title>Startup on Fire</title>
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="stylesheet" href="/src/styles/launch.css" />
   </head>
   <body>
-    <main id="app">
+    <main id="app" data-launch="active">
+      <div id="launch-root">
+        <section
+          class="launch-screen"
+          data-state="loading"
+          aria-label="Startup on Fire launch screen"
+          aria-busy="true"
+        >
+          <span class="launch-screen__glow" aria-hidden="true"></span>
+          <span class="launch-screen__emblem" aria-hidden="true">◆</span>
+          <div class="launch-screen__content">
+            <span class="launch-screen__eyebrow">ETHONLINE 2026 // FIRE CITY</span>
+            <h1>Startup on Fire</h1>
+            <p class="launch-screen__tagline">Walk the plaza. Help founders. Earn the fire.</p>
+            <div class="launch-screen__status" aria-live="polite">
+              <strong>Warming the city…</strong>
+              <span>Preparing the game engine.</span>
+              <div class="launch-screen__meter">
+                <progress max="100" value="0" aria-label="Fire City loading progress"></progress>
+                <span class="launch-screen__progress-value">0%</span>
+              </div>
+            </div>
+            <button class="button button--primary launch-screen__action" type="button" hidden>
+              Enter Fire City
+            </button>
+            <small class="launch-screen__rule">Fire is earned, never bought.</small>
+            <noscript>
+              <p class="launch-screen__noscript">
+                JavaScript is required to enter Fire City. Enable it, then reload this page.
+              </p>
+            </noscript>
+          </div>
+        </section>
+      </div>
       <div id="game-root" aria-label="Startup on Fire game canvas"></div>
       <div id="ui-root" aria-live="polite"></div>
     </main>

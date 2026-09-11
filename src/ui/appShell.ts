@@ -4,6 +4,7 @@ import type { BackendStatus } from "../types/backend";
 
 export type AppShell = Readonly<{
   updateBackendStatus: (status: BackendStatus) => void;
+  focusGameAction: () => void;
   destroy: () => void;
 }>;
 
@@ -230,6 +231,10 @@ export function createAppShell(
     updateBackendStatus(nextStatus) {
       status.textContent = statusCopy(nextStatus);
       panel.dataset.state = nextStatus.state;
+    },
+    focusGameAction() {
+      const focusTarget = primaryButton.hidden ? secondaryButton : primaryButton;
+      if (!focusTarget.hidden) focusTarget.focus({ preventScroll: true });
     },
     destroy() {
       unsubscribe();

@@ -1,0 +1,179 @@
+#launch-root {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.launch-screen {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  overflow: hidden;
+  color: var(--sof-cream);
+  background:
+    linear-gradient(90deg, rgb(120 189 242 / 7%) 1px, transparent 1px) 0 0 / 16px 16px,
+    linear-gradient(rgb(120 189 242 / 7%) 1px, transparent 1px) 0 0 / 16px 16px,
+    radial-gradient(circle at 50% 58%, rgb(255 194 71 / 13%), transparent 34%),
+    #16251b;
+}
+
+.launch-screen__glow {
+  position: absolute;
+  z-index: -1;
+  width: min(68vw, 560px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(255 194 71 / 13%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 32px rgb(255 194 71 / 4%),
+    0 0 90px rgb(255 128 95 / 16%);
+}
+
+.launch-screen__emblem {
+  position: absolute;
+  top: calc(50% - 190px);
+  left: 50%;
+  color: var(--sof-ember);
+  font-size: 28px;
+  text-shadow: 0 0 20px rgb(255 194 71 / 48%);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.launch-screen__content {
+  display: grid;
+  width: min(520px, 100%);
+  gap: 16px;
+  padding: 32px;
+  border: 1px solid rgb(255 194 71 / 48%);
+  border-radius: 8px;
+  background: var(--sof-charcoal-raised);
+  box-shadow: 0 18px 54px rgb(0 0 0 / 42%);
+  text-align: center;
+}
+
+.launch-screen__eyebrow {
+  color: var(--sof-tech-blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.launch-screen h1,
+.launch-screen p {
+  margin: 0;
+}
+
+.launch-screen h1 {
+  color: var(--sof-ember);
+  font-size: clamp(30px, 7vw, 48px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.launch-screen__tagline {
+  color: var(--sof-leaf);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.launch-screen__status {
+  display: grid;
+  gap: 8px;
+  min-height: 88px;
+  padding: 12px 16px;
+  border: 1px solid rgb(188 217 191 / 18%);
+  border-radius: 6px;
+  background: rgb(22 37 27 / 64%);
+  text-align: left;
+}
+
+.launch-screen__status strong {
+  color: var(--sof-cream);
+  font-size: 13px;
+}
+
+.launch-screen__status > span {
+  color: var(--sof-leaf);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.launch-screen__meter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.launch-screen__meter progress {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 243 207 / 14%);
+}
+
+.launch-screen__meter progress::-webkit-progress-bar {
+  background: rgb(255 243 207 / 14%);
+}
+
+.launch-screen__meter progress::-webkit-progress-value {
+  background: var(--sof-ember);
+}
+
+.launch-screen__meter progress::-moz-progress-bar {
+  background: var(--sof-ember);
+}
+
+.launch-screen__progress-value {
+  min-width: 4ch;
+  color: var(--sof-ember) !important;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.launch-screen__action {
+  justify-self: center;
+  min-width: 190px;
+}
+
+.launch-screen__rule {
+  color: var(--sof-leaf);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+.launch-screen__noscript {
+  color: var(--sof-danger);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.launch-screen[data-state="error"] .launch-screen__status {
+  border-color: rgb(255 128 95 / 58%);
+}
+
+.launch-screen[data-state="error"] .launch-screen__status strong {
+  color: var(--sof-danger);
+}
+
+@media (max-width: 560px) {
+  .launch-screen {
+    padding: 20px;
+  }
+
+  .launch-screen__content {
+    gap: 12px;
+    padding: 24px;
+  }
+
+  .launch-screen__emblem {
+    top: 14px;
+  }
+}

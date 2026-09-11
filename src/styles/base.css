@@ -1,0 +1,40 @@
+:root {
+  --sof-cream: #fff3cf;
+  --sof-ember: #ffc247;
+  --sof-charcoal: #1f2420;
+  --sof-charcoal-raised: rgb(31 36 32 / 96%);
+  --sof-leaf: #bcd9bf;
+  --sof-tech-blue: #78bdf2;
+  --sof-success: #7acb81;
+  --sof-danger: #ff805f;
+  color: var(--sof-cream);
+  background: #16251b;
+  font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#app {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(90deg, rgb(31 83 54 / 26%) 1px, transparent 1px) 0 0 / 16px 16px,
+    linear-gradient(rgb(31 83 54 / 26%) 1px, transparent 1px) 0 0 / 16px 16px,
+    #468948;
+}

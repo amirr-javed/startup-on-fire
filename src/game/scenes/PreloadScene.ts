@@ -1,31 +1,32 @@
 import Phaser from "phaser";
 
-type AssetDefinition = Readonly<{
-  id: string;
-  url: string;
-  frameWidth?: number;
-  frameHeight?: number;
-}>;
-
-type AssetManifest = Readonly<{ assets: readonly AssetDefinition[] }>;
-
-function isManifest(value: unknown): value is AssetManifest {
-  if (typeof value !== "object" || value === null || !("assets" in value)) return false;
-  return Array.isArray(value.assets);
-}
+import type { GameLoadBridge } from "../loading/GameLoadBridge";
+import { isAssetManifest } from "../loading/assetManifest";
 
 export class PreloadScene extends Phaser.Scene {
-  public constructor() {
+  readonly #loadBridge: GameLoadBridge;
+  #loadFailed = false;
+
+  public constructor(loadBridge: GameLoadBridge) {
     super("preload");
+    this.#loadBridge = loadBridge;
   }
 
   public preload(): void {
+    this.load.once(Phaser.Loader.Events.FILE_LOAD_ERROR, () => {
+      this.#loadFailed = true;
+      this.#loadBridge.fail("The city assets could not be loaded.");
+    });
+    this.#loadBridge.loading(0.05, "Finding the city map…");
     this.load.json("asset-manifest", "/assets/manifest.json");
   }
 
   public create(): void {
     const manifest: unknown = this.cache.json.get("asset-manifest");
-    if (!isManifest(manifest)) throw new Error("The runtime asset manifest is invalid.");
+    if (this.#loadFailed || !isAssetManifest(manifest)) {
+      this.#loadBridge.fail("The city map is unavailable.");
+      return;
+    }
 
     for (const asset of manifest.assets) {
       if (asset.frameWidth !== undefined && asset.frameHeight !== undefined) {
@@ -38,7 +39,14 @@ export class PreloadScene extends Phaser.Scene {
       }
     }
 
-    this.load.once(Phaser.Loader.Events.COMPLETE, () => this.scene.start("plaza"));
+    this.load.on(Phaser.Loader.Events.PROGRESS, (progress: number) => {
+      this.#loadBridge.loading(0.15 + progress * 0.85);
+    });
+    this.load.once(Phaser.Loader.Events.COMPLETE, () => {
+      if (this.#loadFailed) return;
+      this.#loadBridge.ready();
+      this.scene.start("plaza");
+    });
     this.load.start();
   }
 }

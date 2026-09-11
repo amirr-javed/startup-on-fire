@@ -1,5 +1,13 @@
 # Startup on Fire — Decisions
 
+## 2026-09-12 — SOF-018 — Loading is a truthful guest entry boundary
+
+- Keep the launch experience in accessible DOM/CSS above Phaser and drive its progress from actual loader events rather than a timer.
+- Hold the ready state for an explicit Enter Fire City action so the product promise, guest access, and earned-fire rule are legible even on a warm cache.
+- Make the canvas and game UI inert until entry, then transfer focus to Ember’s first onboarding action.
+- Convert manifest and asset failures into a concise retry state; validate manifest IDs, local paths, uniqueness, and sprite dimensions before handing them to Phaser.
+- Use no entrance animation. The first actionable screen should be immediate, stable, and compatible with reduced-motion users by construction.
+
 ## 2026-09-12 — SOF-017 — ENS identity is optional read-only enrichment
 
 - Resolve normalized booth names on ENSv2 Sepolia through viem’s chain-aware client; never configure a resolver or implementation contract address.

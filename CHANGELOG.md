@@ -2,6 +2,10 @@
 
 This records planning revisions. It is not evidence that the game, Git repository, sponsor integrations, or runtime assets are implemented. Repository task IDs start at SOF-001 during Git initialization; planning changes use DOC identifiers.
 
+## SOF-018 — September 12, 2026 — Accessible Fire City launch screen
+
+Added the required landing/loading experience with real Phaser asset progress, a clear guest/no-wallet promise, a focused Enter Fire City handoff, and recoverable manifest/asset failure UI. The background game remains inert until entry, malformed manifests fail safely, and desktop/landscape/mobile browser checks pass.
+
 ## SOF-017 — September 12, 2026 — Runtime ENSv2 booth identity
 
 Added a read-only Sepolia ENSv2 identity adapter and realtime booth directory. Founder dialogue now displays validated ENS names, startup/founder text records, descriptions, and HTTPS links when present while preserving immediate static fallbacks during missing, invalid, or unavailable provider states. Automated resolver, cache, lifecycle, content, and DOM tests pass; the placeholder booth names still need registration/records and account-backed validation.

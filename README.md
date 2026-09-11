@@ -6,7 +6,7 @@ Startup on Fire is an ETHOnline 2026 vertical slice: a cozy pixel city where pla
 
 ## Current status
 
-The core route renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. The SOF-015 backend defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits. After an earned Practice Spark, the SOF-016 browser flow can optionally request World Selfie Check and send public fuel through that contract. SOF-017 adds read-only ENSv2 Sepolia identity enrichment with immediate static fallback. Real World acceptance, actual ENS booth records, final Convex deployment, and Vercel remain pending.
+The core route opens with a real asset-loading/guest entry screen, then renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. The SOF-015 backend defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits. After an earned Practice Spark, the SOF-016 browser flow can optionally request World Selfie Check and send public fuel through that contract. SOF-017 adds read-only ENSv2 Sepolia identity enrichment with immediate static fallback. Real World acceptance, actual ENS booth records, final Convex deployment, and Vercel remain pending.
 
 ## Requirements
 
@@ -25,6 +25,8 @@ pnpm dev
 `pnpm convex:once` opens the Convex login/configuration flow on first use, writes the real deployment values to the ignored `.env.local`, and deploys local Convex functions. Treat it as an external deployment action. Do not copy the placeholder URL over that generated file and do not commit it.
 
 Open the URL printed by Vite. Without `VITE_CONVEX_URL`, the canvas still loads and the compact status panel reports that backend setup is pending. `VITE_SEPOLIA_RPC_URL` is an optional public browser RPC override for ENS reads; omit it to use viem's default Sepolia transport.
+
+The launch screen reports actual Phaser asset progress. When the city is ready, choose **Enter Fire City** to begin the guest onboarding; no account or wallet is required. If the manifest or an asset fails, use the inline **Try again** action after checking the connection.
 
 ## Plaza controls
 

@@ -1,6 +1,6 @@
 # Startup on Fire — Architecture
 
-Status: core development through SOF-017. This describes the implemented plaza, protected quest/backend contract, earned public-fuel interface, read-only ENS identity, and the boundaries later features must preserve.
+Status: core development through SOF-018. This describes the launch/loading boundary, implemented plaza, protected quest/backend contract, earned public-fuel interface, read-only ENS identity, and the boundaries later features must preserve.
 
 ## SOF-005 playable plaza
 
@@ -20,6 +20,20 @@ Status: core development through SOF-017. This describes the implemented plaza, 
 - **Convex:** owns sessions, booth placement state, quest completion, verification eligibility, fuel records, scores, tiers, and realtime truth.
 - **Provider adapters:** isolate World and ENS APIs from scene classes and UI components.
 - **Pure domain modules:** calculate deterministic rules such as fire tiers and UTC date keys without framework dependencies.
+
+## SOF-018 launch/loading boundary
+
+`index.html` contains semantic fallback loading markup, while `base.css` and `launch.css` are discovered independently of the game script. `GameLoadBridge` then carries actual Phaser manifest/asset progress into `launchScreen.ts`, which takes over the same first-run DOM surface. The canvas and normal game UI remain inert until assets are ready and the player explicitly enters; focus then moves to Ember’s first onboarding action. The screen reserves stable status space, uses a native progress element, and provides an inline reload action when loading fails.
+
+```text
+manifest load --> validated asset list --> Phaser progress --> DOM launch status
+      |                    |                       |
+      +-- invalid ---------+-- file error --------+--> retry screen
+                                                      |
+ready plaza + player entry --------------------------> focus onboarding
+```
+
+The pure manifest guard rejects empty/duplicate IDs, non-local asset URLs, and incomplete or non-positive sprite frame dimensions before Phaser consumes them.
 
 ## Implemented Phase 1 shell
 
