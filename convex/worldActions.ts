@@ -11,8 +11,8 @@ import {
   parseWorldVerifierResponse,
   readWorldConfiguration,
 } from "./lib/world";
-
-const SPIKE_SIGNAL = "startup-on-fire-phase-1-selfie-check";
+import { isOpaqueToken } from "./lib/game";
+import { sha256, worldSignalForSession } from "./lib/security";
 
 const worldEnvironment = () =>
   readWorldConfiguration({
@@ -78,6 +78,11 @@ const requestContextResult = v.union(
     code: v.literal("signing_failed"),
     message: v.string(),
   }),
+  v.object({
+    success: v.literal(false),
+    code: v.literal("invalid_session"),
+    message: v.string(),
+  }),
 );
 
 const verificationResult = v.union(
@@ -90,6 +95,7 @@ const verificationResult = v.union(
       v.literal("provider_rejected"),
       v.literal("provider_unavailable"),
       v.literal("replay_detected"),
+      v.literal("invalid_session"),
     ),
     message: v.string(),
   }),
@@ -104,10 +110,24 @@ const publicConfigurationError = (code: "not_configured" | "invalid_configuratio
       : "World Sandbox configuration is invalid.",
 });
 
+const publicSessionError = () => ({
+  success: false as const,
+  code: "invalid_session" as const,
+  message: "The guest session is invalid or expired.",
+});
+
 export const createRequestContext = action({
-  args: {},
+  args: { sessionToken: v.string() },
   returns: requestContextResult,
-  handler: () => {
+  handler: async (context, args) => {
+    if (!isOpaqueToken(args.sessionToken)) return publicSessionError();
+    const sessionTokenHash = await sha256(args.sessionToken);
+    const validSession: boolean = await context.runQuery(internal.worldStore.validateGuestSession, {
+      sessionTokenHash,
+      now: Date.now(),
+    });
+    if (!validSession) return publicSessionError();
+
     const configurationResult = worldEnvironment();
     if (!configurationResult.success) {
       return publicConfigurationError(configurationResult.code);
@@ -120,6 +140,7 @@ export const createRequestContext = action({
       signingKey,
       environment,
     } = configurationResult.configuration;
+    const signal = await worldSignalForSession(sessionTokenHash);
 
     try {
       const signature = signRequest({
@@ -133,7 +154,7 @@ export const createRequestContext = action({
         appId,
         action: actionName,
         environment,
-        signal: SPIKE_SIGNAL,
+        signal,
         rpContext: {
           rp_id: rpId,
           nonce: signature.nonce,
@@ -153,17 +174,26 @@ export const createRequestContext = action({
 });
 
 export const verifyProof = action({
-  args: { proof: selfieProof },
+  args: { proof: selfieProof, sessionToken: v.string() },
   returns: verificationResult,
   handler: async (context, args) => {
+    if (!isOpaqueToken(args.sessionToken)) return publicSessionError();
+    const sessionTokenHash = await sha256(args.sessionToken);
+    const validSession: boolean = await context.runQuery(internal.worldStore.validateGuestSession, {
+      sessionTokenHash,
+      now: Date.now(),
+    });
+    if (!validSession) return publicSessionError();
+
     const configurationResult = worldEnvironment();
     if (!configurationResult.success) {
       return publicConfigurationError(configurationResult.code);
     }
 
     const configuration = configurationResult.configuration;
+    const expectedSignal = await worldSignalForSession(sessionTokenHash);
     const response = args.proof.responses[0];
-    const expectedSignalHash = hashSignal(SPIKE_SIGNAL).toLowerCase();
+    const expectedSignalHash = hashSignal(expectedSignal).toLowerCase();
     const submittedNullifier = response ? canonicalizeNullifier(response.nullifier) : null;
 
     if (
@@ -221,7 +251,12 @@ export const verifyProof = action({
     const stored = await context.runMutation(internal.worldStore.consumeNullifier, {
       action: configuration.action,
       nullifier: verification.nullifier,
+      sessionTokenHash,
+      now: Date.now(),
     });
+    if ("invalidSession" in stored) {
+      return publicSessionError();
+    }
     if (stored.replay) {
       return {
         success: false as const,

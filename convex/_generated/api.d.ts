@@ -8,7 +8,12 @@
  * @module
  */
 
+import type * as booths from "../booths.js";
+import type * as gameActions from "../gameActions.js";
+import type * as gameStore from "../gameStore.js";
 import type * as health from "../health.js";
+import type * as lib_game from "../lib/game.js";
+import type * as lib_security from "../lib/security.js";
 import type * as lib_world from "../lib/world.js";
 import type * as worldActions from "../worldActions.js";
 import type * as worldStore from "../worldStore.js";
@@ -20,7 +25,12 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  booths: typeof booths;
+  gameActions: typeof gameActions;
+  gameStore: typeof gameStore;
   health: typeof health;
+  "lib/game": typeof lib_game;
+  "lib/security": typeof lib_security;
   "lib/world": typeof lib_world;
   worldActions: typeof worldActions;
   worldStore: typeof worldStore;
