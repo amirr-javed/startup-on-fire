@@ -36,7 +36,8 @@ export class BugSquashScene extends Phaser.Scene {
   #roundStartedAt = 0;
   #roundGeneration = 0;
   #hitPending = false;
-  #errorMessage = "The quest could not sync with Fire City.";
+  #serverProtected = false;
+  #errorMessage = "Protected quest sync is unavailable. Retry it, or play a local practice round.";
 
   public constructor(services: BugSquashServices) {
     super("bug-squash");
@@ -95,7 +96,12 @@ export class BugSquashScene extends Phaser.Scene {
 
     if (action === "primary") {
       if (this.#status === "success") this.scene.start("plaza");
-      else if (this.#status === "failed" || this.#status === "error") this.#startRound();
+      else if (this.#status === "failed") this.#startRound();
+      else if (this.#status === "error") this.#startPracticeRound();
+    }
+    if (action === "secondary" && this.#status === "error") {
+      this.#startRound();
+      return;
     }
     if (action === "secondary" || Phaser.Input.Keyboard.JustDown(this.#escape)) {
       this.#questSession.resetKindredQuest();
@@ -143,6 +149,14 @@ export class BugSquashScene extends Phaser.Scene {
   }
 
   #startRound(): void {
+    this.#resetRound(this.#gameplayBackend !== null);
+  }
+
+  #startPracticeRound(): void {
+    this.#resetRound(false);
+  }
+
+  #resetRound(serverProtected: boolean): void {
     const generation = ++this.#roundGeneration;
     this.#clearBugs();
     this.#score = 0;
@@ -153,10 +167,11 @@ export class BugSquashScene extends Phaser.Scene {
     this.#minimumElapsedMs = 0;
     this.#roundStartedAt = performance.now();
     this.#hitPending = false;
-    this.#status = this.#gameplayBackend === null ? "playing" : "preparing";
+    this.#serverProtected = serverProtected;
+    this.#status = serverProtected ? "preparing" : "playing";
     if (this.#status === "playing") this.#spawnBug();
     this.#publish();
-    if (this.#gameplayBackend !== null) void this.#prepareServerRound(generation);
+    if (serverProtected) void this.#prepareServerRound(generation);
   }
 
   async #prepareServerRound(generation: number): Promise<void> {
@@ -164,7 +179,9 @@ export class BugSquashScene extends Phaser.Scene {
       const result = await this.#gameplayBackend!.startQuest("kindred-labs");
       if (generation !== this.#roundGeneration || !this.scene.isActive()) return;
       if (result.status === "rejected") {
-        this.#failSync("Fire City could not start this quest. Try again in a moment.");
+        this.#failSync(
+          "Protected quest sync could not start this run. Retry it, or play a local practice round.",
+        );
         return;
       }
       this.#attemptId = result.attemptId;
@@ -178,7 +195,9 @@ export class BugSquashScene extends Phaser.Scene {
       this.#publish();
     } catch {
       if (generation === this.#roundGeneration && this.scene.isActive()) {
-        this.#failSync("Fire City is unavailable. Check your connection, then retry.");
+        this.#failSync(
+          "Protected quest sync is unavailable. Retry it, or play a local practice round.",
+        );
       }
     }
   }
@@ -215,7 +234,8 @@ export class BugSquashScene extends Phaser.Scene {
 
   #squash(bug: Phaser.GameObjects.Sprite): void {
     if (this.#status !== "playing" || !bug.active || this.#hitPending) return;
-    if (this.#gameplayBackend === null) {
+    const gameplayBackend = this.#gameplayBackend;
+    if (!this.#serverProtected || gameplayBackend === null) {
       this.#acceptSquash(bug, this.#score + 1);
       return;
     }
@@ -225,7 +245,7 @@ export class BugSquashScene extends Phaser.Scene {
     bug.disableInteractive();
     const generation = this.#roundGeneration;
     const hitKey = `bug-${crypto.randomUUID()}`;
-    void this.#gameplayBackend
+    void gameplayBackend
       .recordQuestHit(attemptId, hitKey)
       .then((result) => {
         if (generation !== this.#roundGeneration || this.#status !== "playing") return;
@@ -238,12 +258,16 @@ export class BugSquashScene extends Phaser.Scene {
           if (bug.active) bug.setInteractive({ cursor: "pointer", useHandCursor: true });
           return;
         }
-        this.#failSync("The quest lost sync with Fire City. Retry to start a clean run.");
+        this.#failSync(
+          "Protected quest sync was lost. Retry it, or restart as a local practice round.",
+        );
       })
       .catch(() => {
         if (generation === this.#roundGeneration && this.#status === "playing") {
           this.#hitPending = false;
-          this.#failSync("The quest lost connection to Fire City. Retry when you’re back online.");
+          this.#failSync(
+            "Protected quest sync was lost. Retry it, or restart as a local practice round.",
+          );
         }
       });
   }
@@ -262,10 +286,10 @@ export class BugSquashScene extends Phaser.Scene {
 
   #finishRound(success: boolean): void {
     if (this.#status !== "playing") return;
-    if (!success || this.#gameplayBackend === null) {
+    if (!success || !this.#serverProtected) {
       this.#status = success ? "success" : "failed";
       this.#clearBugs();
-      if (success) this.#questSession.completeKindredQuest();
+      if (success) this.#questSession.completeKindredQuest("local");
       this.#publish();
       return;
     }
@@ -285,14 +309,18 @@ export class BugSquashScene extends Phaser.Scene {
       if (generation !== this.#roundGeneration || !this.scene.isActive()) return;
       if (result.status === "completed") {
         this.#status = "success";
-        this.#questSession.completeKindredQuest();
+        this.#questSession.completeKindredQuest("server");
         this.#publish();
         return;
       }
-      this.#failSync("Fire City could not confirm this run. Retry to earn a server-saved spark.");
+      this.#failSync(
+        "Protected quest sync could not confirm this run. Retry it to earn a server-saved spark.",
+      );
     } catch {
       if (generation === this.#roundGeneration && this.scene.isActive()) {
-        this.#failSync("Fire City could not confirm this run. Check your connection and retry.");
+        this.#failSync(
+          "Protected quest sync could not confirm this run. Retry it to earn a server-saved spark.",
+        );
       }
     }
   }
@@ -323,11 +351,11 @@ export class BugSquashScene extends Phaser.Scene {
               : this.#status === "completing"
                 ? "Confirming your run…"
                 : this.#status === "error"
-                  ? "Quest sync interrupted"
+                  ? "Protected sync unavailable"
                   : "Bug Squash",
       body:
         this.#status === "success"
-          ? `You earned a ${this.#gameplayBackend === null ? "local " : "server-saved "}Practice Spark. Take it back to Maya.`
+          ? `You earned a ${this.#serverProtected ? "server-saved " : "local "}Practice Spark. Take it back to Maya.`
           : this.#status === "failed"
             ? "You kept the board safer. Try again to earn the spark."
             : this.#status === "preparing"
@@ -346,14 +374,18 @@ export class BugSquashScene extends Phaser.Scene {
           : this.#status === "failed"
             ? "Try again"
             : this.#status === "error"
-              ? "Retry quest"
+              ? "Play practice round"
               : this.#status === "preparing" || this.#status === "completing"
                 ? undefined
                 : "Squash target · Space",
       secondaryLabel:
-        this.#status === "playing" || this.#status === "preparing" || this.#status === "completing"
-          ? "Leave quest"
-          : "Back to plaza",
+        this.#status === "error"
+          ? "Retry protected sync"
+          : this.#status === "playing" ||
+              this.#status === "preparing" ||
+              this.#status === "completing"
+            ? "Leave quest"
+            : "Back to plaza",
     };
     const state: GameUiState = {
       nearbyBooth: null,

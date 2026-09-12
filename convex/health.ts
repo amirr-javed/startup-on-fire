@@ -7,9 +7,11 @@ export const status = query({
   returns: v.object({
     service: v.literal("convex"),
     status: v.literal("ok"),
+    gameApiVersion: v.literal(1),
   }),
   handler: () => ({
     service: "convex" as const,
     status: "ok" as const,
+    gameApiVersion: 1 as const,
   }),
 });

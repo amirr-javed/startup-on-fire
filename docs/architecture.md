@@ -1,6 +1,6 @@
 # Startup on Fire — Architecture
 
-Status: core development through SOF-018. This describes the launch/loading boundary, implemented plaza, protected quest/backend contract, earned public-fuel interface, read-only ENS identity, and the boundaries later features must preserve.
+Status: core development through SOF-019. This describes the launch/loading boundary, implemented plaza, protected quest/backend contract, earned public-fuel interface, read-only ENS identity, and the boundaries later features must preserve.
 
 ## SOF-005 playable plaza
 
@@ -90,6 +90,12 @@ Convex booth + ensName --> immediate static booth --> Phaser/dialogue
 ```
 
 The resolver deduplicates in-flight reads, caches successful/missing results for five minutes and failures for 30 seconds, and discards stale subscription results. The optional `VITE_SEPOLIA_RPC_URL` selects public browser transport only; no secret or write authority belongs in browser configuration.
+
+## SOF-019 compatibility and practice fallback
+
+`health.status` publishes a literal game API version in addition to transport health. The browser enables protected gameplay actions only after that exact contract is observed; an older deployment may continue supplying booth data, but it cannot trigger calls to missing quest functions or claim complete readiness.
+
+If protected quest preparation, hit recording, or completion fails, Bug Squash offers a clean local Practice round. `QuestSession` retains whether the completion was local or server-saved. The local route can award and animate only a Practice Spark; the World/public-fuel offer requires server-saved provenance. Partially recorded protected runs are never converted into local public eligibility.
 
 ## Lifecycle rule
 

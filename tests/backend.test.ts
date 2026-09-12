@@ -6,15 +6,19 @@ import { isHealthResponse } from "../src/types/backend";
 
 describe("isHealthResponse", () => {
   it("accepts the expected health response", () => {
-    expect(isHealthResponse({ service: "convex", status: "ok" })).toBe(true);
+    expect(isHealthResponse({ service: "convex", status: "ok", gameApiVersion: 1 })).toBe(true);
   });
 
-  it.each([null, {}, { service: "convex", status: "down" }, "ok"])(
-    "rejects an invalid health response",
-    (value) => {
-      expect(isHealthResponse(value)).toBe(false);
-    },
-  );
+  it.each([
+    null,
+    {},
+    { service: "convex", status: "down", gameApiVersion: 1 },
+    { service: "convex", status: "ok" },
+    { service: "convex", status: "ok", gameApiVersion: 2 },
+    "ok",
+  ])("rejects an invalid health response", (value) => {
+    expect(isHealthResponse(value)).toBe(false);
+  });
 
   it("reports missing configuration without opening a connection", () => {
     const statuses: BackendStatus[] = [];

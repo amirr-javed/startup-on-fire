@@ -2,6 +2,10 @@
 
 This records planning revisions. It is not evidence that the game, Git repository, sponsor integrations, or runtime assets are implemented. Repository task IDs start at SOF-001 during Git initialization; planning changes use DOC identifiers.
 
+## SOF-019 — September 12, 2026 — Product review and resilient guest quest
+
+Completed an evidence-based eight-dimension review and prioritized submission roadmap. Repaired the review's highest-impact local failure: unavailable protected quest actions now offer an honest local Practice round instead of ending the player journey, while explicit completion provenance prevents that fallback from unlocking public fuel. CI now validates all runtime asset hashes before code checks.
+
 ## SOF-018 — September 12, 2026 — Accessible Fire City launch screen
 
 Added the required landing/loading experience with real Phaser asset progress, a clear guest/no-wallet promise, a focused Enter Fire City handoff, and recoverable manifest/asset failure UI. The background game remains inert until entry, malformed manifests fail safely, and desktop/landscape/mobile browser checks pass.

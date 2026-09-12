@@ -28,6 +28,10 @@ Open the URL printed by Vite. Without `VITE_CONVEX_URL`, the canvas still loads 
 
 The launch screen reports actual Phaser asset progress. When the city is ready, choose **Enter Fire City** to begin the guest onboarding; no account or wallet is required. If the manifest or an asset fails, use the inline **Try again** action after checking the connection.
 
+If protected quest synchronization is unavailable, Bug Squash offers a fresh local Practice round instead of blocking guest play. That fallback can show the Practice Spark feedback but cannot unlock World verification or public fuel; only a server-saved completion can do so.
+
+The health response also carries a literal game API version. A stale deployment can still provide fallback booth data, but the browser will report **Game update pending · Practice available** and will not call protected functions that the deployment does not expose.
+
 ## Plaza controls
 
 - Move with arrow keys or WASD.
@@ -87,6 +91,8 @@ pnpm typecheck    # Run strict TypeScript checks
 pnpm test         # Run Vitest once
 pnpm build        # Typecheck and create the production bundle
 ```
+
+The current evidence-backed product scorecard and launch priorities are recorded in `docs/product-review.md`.
 
 ## Architecture
 

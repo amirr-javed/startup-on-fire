@@ -1,5 +1,13 @@
 # Startup on Fire — AI Usage
 
+## SOF-019 — 2026-09-12
+
+- **Tools:** OpenAI Codex, the structured product-review framework, controlled local browser inspection, TypeScript, Vitest, ESLint, asset validation, and production build tooling.
+- **Purpose:** Review the complete first-player experience, produce a balanced launch roadmap, and repair the highest-impact local failure without weakening public-fire security.
+- **Changes assisted:** Eight-dimension product scorecard, first-time walkthrough, literal backend API compatibility gate, local Practice fallback for unavailable protected quest sync, explicit completion provenance/public-fuel gating, accurate health status copy, CI asset validation, focused tests, and project tracking.
+- **Human decision:** Continue the highest-priority work at a high quality bar with small tracked commits.
+- **Limitations disclosed:** No backend/app deployment, provider credential, World proof, ENS registration/write, physical-device test, two-client production pass, or demo recording was performed.
+
 ## SOF-018 — 2026-09-12
 
 - **Tools:** OpenAI Codex, the frontend quality/craft guidelines, local Vitest/TypeScript/ESLint/build tooling, and controlled Windows browser inspection.

@@ -34,6 +34,24 @@ afterEach(() => {
 });
 
 describe("app shell booth identity", () => {
+  it("describes a successful health subscription without promising every game action", () => {
+    const root = document.createElement("main");
+    document.body.append(root);
+    const shell = createAppShell(root, new DigitalInput(), new GameUiBridge());
+
+    shell.updateBackendStatus({
+      service: "convex",
+      status: "ok",
+      gameApiVersion: 1,
+      state: "connected",
+    });
+
+    expect(root.querySelector(".scout-panel__status")?.textContent).toBe(
+      "Live booth feed connected",
+    );
+    shell.destroy();
+  });
+
   it("shows a safe external startup link and ENS status in founder dialogue", () => {
     vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => {
       callback(0);

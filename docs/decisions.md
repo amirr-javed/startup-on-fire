@@ -1,5 +1,14 @@
 # Startup on Fire — Decisions
 
+## 2026-09-12 — SOF-019 — Backend failure may degrade play, never public truth
+
+- A healthy realtime booth subscription must not imply that every backend action is compatible; the HUD labels only the live booth feed.
+- Publish a literal game API version from the health query and keep gameplay actions disabled until the browser observes the expected version. This prevents raw missing-function calls against stale deployments.
+- Publish a literal game API version from the health query and keep gameplay actions disabled until the browser observes the expected version. This prevents raw missing-function calls against stale deployments.
+- If protected quest synchronization cannot start or finish, offer a clean local Practice round instead of dead-ending guest play.
+- Store local versus server-saved quest completion provenance in the in-memory quest session. Only a server-saved completion may expose the World/public-fuel action.
+- Run the deterministic runtime-asset validator in CI before code quality checks so corrupt or stale game art cannot pass a release checkpoint.
+
 ## 2026-09-12 — SOF-018 — Loading is a truthful guest entry boundary
 
 - Keep the launch experience in accessible DOM/CSS above Phaser and drive its progress from actual loader events rather than a timer.

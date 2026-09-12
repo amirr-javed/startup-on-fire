@@ -61,6 +61,7 @@ class ConvexGameplayBackend implements GameplayBackend {
   readonly #client: ConvexClient;
   #session: StoredSession | null = readStoredSession();
   #sessionRequest: Promise<StoredSession> | null = null;
+  #compatible = false;
 
   public constructor(client: ConvexClient) {
     this.#client = client;
@@ -73,7 +74,12 @@ class ConvexGameplayBackend implements GameplayBackend {
     return this.#client.onUpdate(api.booths.list, {}, listener, onError);
   }
 
+  public setCompatible(compatible: boolean): void {
+    this.#compatible = compatible;
+  }
+
   public async getSessionToken(): Promise<string> {
+    this.#assertCompatible();
     return (await this.#ensureSession()).token;
   }
 
@@ -139,6 +145,12 @@ class ConvexGameplayBackend implements GameplayBackend {
       // The in-memory token is already cleared.
     }
   }
+
+  #assertCompatible(): void {
+    if (!this.#compatible) {
+      throw new Error("The connected deployment does not expose the required game API version.");
+    }
+  }
 }
 
 export function connectToBackend(
@@ -151,6 +163,7 @@ export function connectToBackend(
   }
 
   const client = new ConvexClient(convexUrl);
+  const gameplay = new ConvexGameplayBackend(client);
   onStatus({ state: "connecting" });
 
   const unsubscribe = client.onUpdate(
@@ -158,19 +171,25 @@ export function connectToBackend(
     {},
     (response: unknown) => {
       if (isHealthResponse(response)) {
+        gameplay.setCompatible(true);
         onStatus({ state: "connected", ...response });
         return;
       }
-      onStatus({ state: "error", message: "The backend returned an unexpected response." });
+      gameplay.setCompatible(false);
+      onStatus({
+        state: "error",
+        message: "Game update pending · Practice available",
+      });
     },
     () => {
+      gameplay.setCompatible(false);
       onStatus({ state: "error", message: "The backend is unavailable. Try again shortly." });
     },
   );
 
   return {
     client,
-    gameplay: new ConvexGameplayBackend(client),
+    gameplay,
     disconnect: () => {
       unsubscribe();
       void client.close();

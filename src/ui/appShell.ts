@@ -15,7 +15,7 @@ function statusCopy(status: BackendStatus): string {
     case "connecting":
       return "Connecting to realtime backend…";
     case "connected":
-      return "Realtime backend connected";
+      return "Live booth feed connected";
     case "error":
       return status.message;
   }

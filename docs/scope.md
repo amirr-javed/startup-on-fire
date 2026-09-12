@@ -1,8 +1,8 @@
 # Startup on Fire — Core Scope
 
-## Active core slice — SOF-018
+## Active core slice — SOF-019
 
-Included: an accessible landing/loading screen, one compact plaza, three booths/founders, keyboard and landscape touch movement, contextual founder interaction, guided first-run onboarding, one complete Kindred Labs Bug Squash quest, an explicitly non-public Practice Spark, fixed realtime booth state, protected guest sessions, server-recorded quest completion, atomic/idempotent verified-fuel rules, the optional World public-fuel UI, and read-only ENSv2 booth enrichment with static fallback.
+Included: an accessible landing/loading screen, one compact plaza, three booths/founders, keyboard and landscape touch movement, contextual founder interaction, guided first-run onboarding, one complete Kindred Labs Bug Squash quest, an explicitly non-public Practice Spark, a safe local fallback when protected quest sync is unavailable, fixed realtime booth state, protected guest sessions, server-recorded quest completion, atomic/idempotent verified-fuel rules, the optional World public-fuel UI, read-only ENSv2 booth enrichment with static fallback, and an evidence-based product review.
 
 Deferred: provider-backed World acceptance evidence, final Convex deployment, real ENS name/record ownership and write evidence, Vercel/public deployment, and optional quests for the other two booths.
 

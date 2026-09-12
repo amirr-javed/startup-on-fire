@@ -14,22 +14,37 @@ describe("first quest progression", () => {
     expect(session.introCompleted).toBe(true);
     expect(session.kindredQuest).toBe("active");
 
-    session.completeKindredQuest();
+    session.completeKindredQuest("server");
     expect(session.kindredQuest).toBe("completed");
+    expect(session.kindredCompletionSource).toBe("server");
     session.throwPracticeSpark();
     expect(session.kindredQuest).toBe("sparked");
+    expect(session.canOfferPublicFuel).toBe(true);
   });
 
   it("does not skip required quest states", () => {
     const session = new QuestSession();
 
-    session.completeKindredQuest();
+    session.completeKindredQuest("server");
     session.throwPracticeSpark();
     expect(session.kindredQuest).toBe("available");
 
     session.startKindredQuest();
     session.resetKindredQuest();
     expect(session.kindredQuest).toBe("available");
+    expect(session.kindredCompletionSource).toBeNull();
+  });
+
+  it("keeps an offline practice completion out of the public-fuel path", () => {
+    const session = new QuestSession();
+
+    session.startKindredQuest();
+    session.completeKindredQuest("local");
+    expect(session.kindredCompletionSource).toBe("local");
+    session.throwPracticeSpark();
+
+    expect(session.kindredQuest).toBe("sparked");
+    expect(session.canOfferPublicFuel).toBe(false);
   });
 
   it("retains unique booth discoveries across scene transitions", () => {

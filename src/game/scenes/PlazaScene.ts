@@ -441,11 +441,14 @@ export class PlazaScene extends Phaser.Scene {
       };
     }
     if (this.#showQuestComplete) {
+      const isServerSaved = this.#questSession.kindredCompletionSource === "server";
       return {
         kind: "quest-complete",
         eyebrow: "QUEST COMPLETE // PRACTICE",
         title: "You earned a Practice Spark",
-        body: "This local spark previews how verified community support grows a public fire. It does not affect the public score.",
+        body: isServerSaved
+          ? "This Practice Spark previews how verified community support grows a public fire. It does not affect the public score."
+          : "This offline Practice Spark keeps the quest playable, but it cannot unlock public fuel without a server-saved run.",
         primaryLabel: "Throw Practice Spark",
         secondaryLabel: "Save it for later",
       };
@@ -484,7 +487,7 @@ export class PlazaScene extends Phaser.Scene {
             : "First trail: Meet Maya at Kindred Labs · West road",
       overlay: this.#overlay(),
       publicFuelOffer:
-        this.#questSession.kindredQuest === "sparked" && this.#nearby?.id === "kindred-labs"
+        this.#questSession.canOfferPublicFuel && this.#nearby?.id === "kindred-labs"
           ? {
               boothSlug: "kindred-labs",
               boothName: this.#boothSummary(this.#nearby)?.name ?? "Kindred Labs",

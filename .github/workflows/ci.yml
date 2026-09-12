@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Validate runtime assets
+        run: pnpm assets:validate
+
       - name: Lint
         run: pnpm lint
 

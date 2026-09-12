@@ -14,6 +14,18 @@ const modules = import.meta.glob("./**/*.*s");
 const NOW = Date.UTC(2026, 8, 11, 12, 0, 0);
 type Backend = TestConvex<typeof schema>;
 
+describe("backend compatibility", () => {
+  it("advertises the game API version required by the browser", async () => {
+    const t = convexTest(schema, modules);
+
+    await expect(t.query(api.health.status, {})).resolves.toEqual({
+      service: "convex",
+      status: "ok",
+      gameApiVersion: 1,
+    });
+  });
+});
+
 async function createSession(t: Backend, tokenHash: string, now = NOW) {
   const sessionId = await t.mutation(internal.gameStore.createGuestSession, {
     tokenHash,
