@@ -38,6 +38,10 @@ const boothDirectory =
         createEnsBoothResolver({ rpcUrl: runtimeConfig.ensRpcUrl }),
       );
 const game = createGame("game-root", input, uiBridge, backend.gameplay, boothDirectory, loadBridge);
+const e2eDriverCleanup =
+  import.meta.env.MODE === "e2e"
+    ? import("./testing/e2eDriver").then(({ installE2eDriver }) => installE2eDriver(game))
+    : Promise.resolve(() => undefined);
 const unmountPublicFuelPanel =
   backend.client === null || backend.gameplay === null
     ? () => undefined
@@ -51,6 +55,7 @@ const unmountPublicFuelPanel =
 window.addEventListener(
   "beforeunload",
   () => {
+    void e2eDriverCleanup.then((cleanup) => cleanup());
     unmountPublicFuelPanel();
     launchScreen.destroy();
     backend.disconnect();

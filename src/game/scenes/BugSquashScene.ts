@@ -210,7 +210,7 @@ export class BugSquashScene extends Phaser.Scene {
       .setInteractive({ cursor: "pointer", useHandCursor: true })
       .play("bug-crawl");
     this.#bugs.add(bug);
-    bug.once(Phaser.Input.Events.POINTER_DOWN, () => this.#squash(bug));
+    bug.once(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => this.#squash(bug));
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reducedMotion) {

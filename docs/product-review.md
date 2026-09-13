@@ -11,6 +11,8 @@ Startup on Fire has a memorable product premise, a coherent playable identity, a
 
 SOF-019 repaired the most damaging local failure found during the walkthrough: a healthy booth subscription could coexist with unavailable protected quest actions, causing the required quest to dead-end. The client now checks a literal game API version before calling protected actions and offers an honest local Practice round while keeping public fuel unavailable unless the run was saved by the server.
 
+SOF-020 deployed the matching actions to the configured personal Convex development deployment and proved a complete server-saved Kindred quest in a clean Chromium browser. This closes the first roadmap item for that development target, not the remaining provider, public-hosting, or submission gates. The scorecard below is the September 12 snapshot and has not been rescored.
+
 ## Scorecard
 
 | Dimension                |      Score | Evidence                                                                                                                                                                                                                                              |

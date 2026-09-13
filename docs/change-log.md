@@ -2,6 +2,19 @@
 
 This log records implementation tasks using actual dates and verified results. A task's commit is identified by the task ID in its commit message; a commit cannot contain its own hash.
 
+## SOF-020 — Deploy and verify the protected quest in Chromium
+
+- **Date/time:** 2026-09-13 PKT (UTC+05:00).
+- **Requested outcome:** Continue P0 work at high quality, commit and push focused changes, and track each change. The first product-review blocker was a stale configured Convex development deployment that prevented protected quest completion.
+- **Starting state:** `main` matched `origin/main` at `57dbc58`. Unrelated untracked `.agents/`, `.claude/`, `CLAUDE.md`, and `skills-lock.json` remained excluded.
+- **Changed paths:** `.github/workflows/ci.yml`, `package.json`, `pnpm-lock.yaml`, `playwright.config.ts`, `vite.config.ts`, `src/game/scenes/BugSquashScene.ts`, `src/main.ts`, `src/testing/e2eDriver.ts`, `tests/e2e/game-smoke.spec.ts`, README, product-review/decision/AI-use/prompt records, and both changelogs.
+- **Reason and before/after:** The configured development backend lacked current protected quest functions. `pnpm convex:once` installed the current functions and three required indexes on `acoustic-sockeye-371`. Direct client calls returned API version 1, a new guest session, eight accepted unique hits, and a server-completed Kindred attempt. Clean-browser Chromium then completed the actual dialogue and protected quest to a server-saved Practice Spark. During test development, Phaser's scene-wide `POINTER_DOWN` constant was found on an individual bug sprite; changing it to `GAMEOBJECT_POINTER_DOWN` restores canvas click/touch hit handling.
+- **Dependencies/configuration/data:** Pinned dev-only `@playwright/test` 1.63.0 and its lockfile entries. The E2E mode builds a frozen preview with a small test-only driver; normal production mode does not import it. CI installs Chromium and runs offline desktop/mobile browser smoke checks. The personal Convex dev deployment was changed; no prod deployment, environment variable, World credential, chain write, or public site was changed. A disposable guest session, quest attempt, eight hits, and completion were written to the dev backend for validation; no token/proof was logged.
+- **Validation:** Direct deployed-backend action proof passed; browser live protected quest passed after the sprite event fix. The final offline `pnpm test:e2e` run passed desktop and mobile-landscape Chromium (2/2). `pnpm assets:validate` passed 21 PNG/hash/grid checks; `pnpm lint`, `pnpm typecheck`, default `pnpm test` (12 files, 74 tests), and `pnpm build` passed. The normal production bundle was inspected and contains no E2E driver identifiers. An earlier unrestricted Vitest run hit three worker-start timeouts under local process contention; `pnpm test --maxWorkers=2` passed, so the stable two-worker cap was added to `vite.config.ts` and the default command then passed. The initial JS chunk remains 1,312.57 kB / 353.54 kB gzip with the known warning.
+- **Risks/pending:** Real World verification and public-fuel rejection/acceptance, two-client realtime fire, ENS owned records/permissions, public hosting, physical touch, and demo video remain P0. The known large initial JS chunk warning remains. Playwright's headless timing required an E2E-only driver for the live quest; this is not a full physical-device input pass.
+- **AI assistance:** Codex implemented and debugged the deployment proof, browser harness, sprite event repair, and records. Prompt archived at `docs/prompts/SOF-020-protected-quest-browser-proof.md`.
+- **Commit mapping:** The focused SOF-020 commit message identifies this record; its hash and push state are reported at handoff.
+
 ## SOF-019 — Review the product and preserve the guest quest during sync failure
 
 - **Date/time:** 2026-09-12 PKT (UTC+05:00)

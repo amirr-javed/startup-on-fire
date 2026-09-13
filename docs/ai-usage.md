@@ -1,5 +1,13 @@
 # Startup on Fire — AI Usage
 
+## SOF-020 — 2026-09-13
+
+- **Tools:** OpenAI Codex, Convex deployment guard, Playwright Chromium, Phaser source/types, TypeScript, Vitest, and local browser inspection.
+- **Purpose:** Close the first product-review blocker with a matching personal-development backend and repeatable browser evidence.
+- **Changes assisted:** Deployed current functions to `acoustic-sockeye-371`, verified guest-session creation and eight server-recorded hits through quest completion, added frozen-build desktop/mobile browser checks, and fixed the sprite-level pointer event name. The E2E-only positioning/action driver is excluded from production mode.
+- **Human decision:** The builder authorized continued priorities with focused commits and pushes. No production Convex deployment, World credential, ENS chain write, or public-hosting action was performed.
+- **Limitations:** The live browser test proves a server-saved Practice Spark, not World verification, accepted public fuel, a two-client fire change, or a public deployment.
+
 ## SOF-019 — 2026-09-12
 
 - **Tools:** OpenAI Codex, the structured product-review framework, controlled local browser inspection, TypeScript, Vitest, ESLint, asset validation, and production build tooling.

@@ -1,5 +1,13 @@
 # Startup on Fire — Decisions
 
+## 2026-09-13 — SOF-020 — Frozen browser checks and real sprite input
+
+- Exercise launch, onboarding, movement, and responsive controls against an immutable E2E build, not the Vite development watcher that can reload between actions.
+- Keep the E2E driver behind Vite's `e2e` mode so a normal production build cannot expose player positioning or sprite activation controls.
+- Use the driver only to skip non-deterministic traversal and activate live bug sprites; the protected quest still calls the deployed Convex actions and must show server-saved completion.
+- Listen to Phaser's game-object pointer-down event on bug sprites, not the scene-wide pointer-down event name. This restores actual canvas click/touch play.
+- Keep provider-backed World fuel separate from this release proof; a protected quest alone is not evidence of a verified public vote.
+
 ## 2026-09-12 — SOF-019 — Backend failure may degrade play, never public truth
 
 - A healthy realtime booth subscription must not imply that every backend action is compatible; the HUD labels only the live booth feed.

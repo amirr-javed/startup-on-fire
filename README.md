@@ -6,7 +6,7 @@ Startup on Fire is an ETHOnline 2026 vertical slice: a cozy pixel city where pla
 
 ## Current status
 
-The core route opens with a real asset-loading/guest entry screen, then renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. The SOF-015 backend defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits. After an earned Practice Spark, the SOF-016 browser flow can optionally request World Selfie Check and send public fuel through that contract. SOF-017 adds read-only ENSv2 Sepolia identity enrichment with immediate static fallback. Real World acceptance, actual ENS booth records, final Convex deployment, and Vercel remain pending.
+The core route opens with a real asset-loading/guest entry screen, then renders a playable pixel plaza with guided onboarding, movement, camera follow, collision, three founder interactions, and one complete Kindred Labs → Bug Squash → Practice Spark loop. The SOF-015 backend defines protected guest sessions, server-recorded quest progress, realtime booth fires, and verified-fuel limits. SOF-020 deployed those functions to the configured personal development deployment and verified the protected quest in a clean browser. After an earned Practice Spark, the SOF-016 browser flow can optionally request World Selfie Check and send public fuel through that contract. SOF-017 adds read-only ENSv2 Sepolia identity enrichment with immediate static fallback. Real World acceptance, actual ENS booth records, public hosting, and the final demo remain pending.
 
 ## Requirements
 
@@ -89,8 +89,12 @@ pnpm spike:ens:write # Run the gated Sepolia permission experiment
 pnpm lint         # Run ESLint
 pnpm typecheck    # Run strict TypeScript checks
 pnpm test         # Run Vitest once
+pnpm test:e2e     # Run desktop and mobile-landscape Chromium smoke checks
+pnpm test:e2e:live # Run the opt-in live-backend browser quest check (see below)
 pnpm build        # Typecheck and create the production bundle
 ```
+
+Install Playwright's managed browser once with `pnpm exec playwright install chromium`. The regular E2E suite builds and previews a frozen `e2e` bundle, excludes the live-backend test, and needs no Convex credentials. For the real protected quest check, point `.env.local` at a matching development deployment and set `E2E_REQUIRE_BACKEND=1` before `pnpm test:e2e:live --project desktop-chromium`. The E2E-only driver positions Scout and activates a visible bug sprite; it is excluded from normal production builds. The browser check does not verify World, public fuel, or ENS permissions.
 
 The current evidence-backed product scorecard and launch priorities are recorded in `docs/product-review.md`.
 

@@ -2,6 +2,10 @@
 
 This records planning revisions. It is not evidence that the game, Git repository, sponsor integrations, or runtime assets are implemented. Repository task IDs start at SOF-001 during Git initialization; planning changes use DOC identifiers.
 
+## SOF-020 — September 13, 2026 — Deploy protected quest and add browser release checks
+
+Deployed the current Convex functions to the configured personal development deployment and confirmed a server-saved Kindred quest. Added desktop/mobile-landscape Playwright smoke checks plus an opt-in live-backend quest check. Fixed Bug Squash sprite pointer events so canvas taps reach the hit handler. World public-fuel acceptance, ENS ownership, public hosting, and demo evidence remain pending.
+
 ## SOF-019 — September 12, 2026 — Product review and resilient guest quest
 
 Completed an evidence-based eight-dimension review and prioritized submission roadmap. Repaired the review's highest-impact local failure: unavailable protected quest actions now offer an honest local Practice round instead of ending the player journey, while explicit completion provenance prevents that fallback from unlocking public fuel. CI now validates all runtime asset hashes before code checks.
